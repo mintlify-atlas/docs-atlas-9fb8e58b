@@ -1,0 +1,71 @@
+{
+  "projectType": "saas",
+  "projectName": "Petal",
+  "projectDescription": "A native macOS menu bar app for fast, local-first audio transcription.",
+  "theme": "almond",
+  "primaryColor": "#E85D75",
+  "lightColor": "#FFB5C2",
+  "darkColor": "#C73E5A",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Get Started",
+        "pages": [
+          "introduction",
+          "installation",
+          "quickstart"
+        ]
+      },
+      {
+        "group": "Core Features",
+        "pages": [
+          "features/recording",
+          "features/transcription-modes",
+          "features/keyboard-shortcuts"
+        ]
+      },
+      {
+        "group": "Transcription Models",
+        "pages": [
+          "models/overview",
+          "models/choosing-a-model",
+          "models/downloading-models"
+        ]
+      },
+      {
+        "group": "Guides",
+        "pages": [
+          "guides/settings",
+          "guides/history",
+          "guides/troubleshooting"
+        ]
+      },
+      {
+        "group": "Reference",
+        "pages": [
+          "reference/supported-languages",
+          "reference/system-requirements",
+          "reference/privacy"
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Local-first audio transcription on macOS",
+    "Multiple AI models (Apple Speech, Qwen, Whisper, Voxtral, Parakeet)",
+    "Menu bar integration with keyboard shortcuts",
+    "Audio preprocessing (silence trimming, auto-speed)",
+    "Transcription history and export",
+    "Verbatim and smart transcription modes"
+  ],
+  "publicApiSurface": [
+    "ModelOption: appleSpeech, qwen3ASR06B4bit, parakeetTDT06BV3, whisperLargeV3Turbo, whisperTiny, mini3b, mini3b8bit",
+    "TranscriptionMode: verbatim, smart",
+    "TranscriptionClient.transcribe(audioURL, modelOption, mode, prompt)",
+    "TranscriptionClient.prepareModelIfNeeded(modelOption)",
+    "AudioClient: recording controls and permissions",
+    "KeyboardShortcuts: push-to-talk and toggle recording",
+    "HistoryClient: transcript history management",
+    "DownloadClient: model download and management"
+  ]
+}
