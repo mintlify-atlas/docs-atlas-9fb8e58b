@@ -1,0 +1,166 @@
+---
+title: 'Model Overview'
+description: 'Complete overview of all transcription models available in Petal'
+icon: 'grid-2'
+---
+
+Petal supports 7 different transcription models from various providers, each optimized for different use cases. All models run locally on your Mac for maximum privacy and speed.
+
+## Available Models
+
+<CardGroup cols={2}>
+  <Card title="Qwen3 ASR 0.6B" icon="bolt" iconType="solid" color="#4F46E5">
+    **Fast multilingual transcription** with support for 30+ languages including Chinese dialects. Default recommended model.
+  </Card>
+  
+  <Card title="Apple Speech" icon="apple" iconType="solid" color="#000000">
+    **Built-in transcription** using Apple's on-device Speech framework. No download required on supported Macs.
+  </Card>
+  
+  <Card title="Parakeet TDT 0.6B" icon="bird" iconType="solid" color="#76B900">
+    **Top-ranked accuracy** on the Open ASR Leaderboard with 110x real-time speed.
+  </Card>
+  
+  <Card title="Whisper Large V3 Turbo" icon="microphone" iconType="solid" color="#10A37F">
+    **High-accuracy transcription** across 99 languages with OpenAI's speed-optimized Whisper model.
+  </Card>
+  
+  <Card title="Whisper Tiny" icon="feather" iconType="solid" color="#10A37F">
+    **Smallest and fastest** Whisper model, ideal when speed matters more than peak accuracy.
+  </Card>
+  
+  <Card title="Voxtral Mini 3B (bf16)" icon="sparkles" iconType="solid" color="#FF7000">
+    **Smart transcription** with Q&A and summarization capabilities from voice audio.
+  </Card>
+  
+  <Card title="Voxtral Mini 3B (8-bit)" icon="wand-magic-sparkles" iconType="solid" color="#FF7000">
+    **Quantized smart model** with lower memory usage while retaining Q&A and summarization features.
+  </Card>
+</CardGroup>
+
+## Complete Model Comparison
+
+All models are optimized for Apple Silicon and run entirely on-device.
+
+| Model | Provider | Size | Parameters | Quantization | Speed Score | Smart Score | Recommended | Smart Mode |
+|-------|----------|------|------------|--------------|-------------|-------------|-------------|------------|
+| **Qwen3 ASR 0.6B (f32)** | FluidAudio | ~2.5 GB | 0.6B | FP32 CoreML | 4/5 | 4/5 | ✅ Yes | ❌ No |
+| **Apple Speech** | Apple | Built-in | On-device | System | 5/5 | 3/5 | ❌ No | ❌ No |
+| **Parakeet TDT 0.6B (v3)** | NVIDIA | N/A | 0.6B | CoreML | 5/5 | 4/5 | ❌ No | ❌ No |
+| **Whisper Large V3 Turbo** | WhisperKit | ~1.6 GB | 809M | CoreML | 2/5 | 5/5 | ❌ No | ❌ No |
+| **Whisper Tiny** | WhisperKit | ~150 MB | 39M | CoreML | 4/5 | 2/5 | ❌ No | ❌ No |
+| **Voxtral Mini 3B (bf16)** | Voxtral Core | ~9.4 GB | 3B | BF16 | 2/5 | 5/5 | ❌ No | ✅ Yes |
+| **Voxtral Mini 3B (8-bit)** | Voxtral Core | ~4.6 GB | 3B | 8-bit | 3/5 | 4/5 | ❌ No | ✅ Yes |
+
+<Note>
+**Speed Score**: 1 (slowest) to 5 (fastest) - measures transcription speed relative to real-time audio.
+
+**Smart Score**: 1 (basic) to 5 (advanced) - measures transcription quality, accuracy, and intelligence.
+</Note>
+
+## Models by Provider
+
+### FluidAudio
+
+**Qwen3 ASR 0.6B (f32)** is Petal's default model, offering an excellent balance of speed and quality.
+
+- **Size**: ~2.5 GB
+- **Languages**: 30+ including Chinese dialects
+- **Speed**: 4/5 - Fast transcription with minimal latency
+- **Quality**: 4/5 - High accuracy across multiple languages
+- **Use case**: Best all-around model for most users
+
+### Apple
+
+**Apple Speech (Built-in)** leverages Apple's native Speech framework available on macOS 26+.
+
+- **Size**: No download required
+- **Availability**: Only on supported Macs running macOS 26 or later
+- **Speed**: 5/5 - Fastest transcription speed
+- **Quality**: 3/5 - Good accuracy, system-optimized
+- **Use case**: Quick transcriptions when you don't want to download models
+
+<Info>
+Apple Speech only appears in the model list if your Mac supports it. The system automatically checks compatibility.
+</Info>
+
+### NVIDIA
+
+**Parakeet TDT 0.6B (v3)** is powered by NVIDIA's research and delivered via FluidAudio.
+
+- **Parameters**: 0.6B
+- **Ranking**: Top-ranked on Open ASR Leaderboard
+- **Speed**: 5/5 - 110x real-time speed
+- **Quality**: 4/5 - Excellent accuracy
+- **Use case**: When you need both speed and accuracy
+
+### WhisperKit
+
+**Whisper Large V3 Turbo** and **Whisper Tiny** bring OpenAI's Whisper models to Petal via the WhisperKit framework.
+
+<Accordion title="Whisper Large V3 Turbo">
+  - **Size**: ~1.6 GB
+  - **Parameters**: 809M
+  - **Languages**: 99 languages supported
+  - **Speed**: 2/5 - Slower but more accurate
+  - **Quality**: 5/5 - Near-large model accuracy
+  - **Use case**: Maximum accuracy across many languages
+</Accordion>
+
+<Accordion title="Whisper Tiny">
+  - **Size**: ~150 MB (smallest model)
+  - **Parameters**: 39M
+  - **Languages**: Multi-language support
+  - **Speed**: 4/5 - Fast and lightweight
+  - **Quality**: 2/5 - Basic accuracy
+  - **Use case**: Extremely fast transcription with minimal storage
+</Accordion>
+
+### Voxtral Core
+
+**Voxtral Mini 3B** models are based on Mistral's speech models and offer unique **smart transcription** capabilities.
+
+<Accordion title="Voxtral Mini 3B (bf16)">
+  - **Size**: ~9.4 GB (largest model)
+  - **Parameters**: 3B
+  - **Quantization**: BF16 (highest quality)
+  - **Speed**: 2/5 - Slower due to large size
+  - **Quality**: 5/5 - Highest quality transcription
+  - **Smart Features**: ✅ Transcription, Q&A, Summarization
+  - **Use case**: When you need smart features and maximum quality
+</Accordion>
+
+<Accordion title="Voxtral Mini 3B (8-bit)">
+  - **Size**: ~4.6 GB (quantized)
+  - **Parameters**: 3B
+  - **Quantization**: 8-bit (reduced memory)
+  - **Speed**: 3/5 - Faster than bf16 version
+  - **Quality**: 4/5 - High quality with slight compromise
+  - **Smart Features**: ✅ Transcription, Q&A, Summarization
+  - **Use case**: Smart features with lower memory requirements
+</Accordion>
+
+<Warning>
+Only Voxtral models support **Smart Mode** for Q&A and summarization. All other models support verbatim transcription only.
+</Warning>
+
+## Download Requirements
+
+Most models require a one-time download before use:
+
+- **Apple Speech**: No download required (built into macOS 26+)
+- **All other models**: Require download through Petal
+
+See [Downloading Models](/models/downloading-models) for detailed instructions on managing model downloads.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Choosing a Model" icon="compass" href="/models/choosing-a-model">
+    Learn how to select the right model for your needs
+  </Card>
+  
+  <Card title="Downloading Models" icon="download" href="/models/downloading-models">
+    Download and manage transcription models
+  </Card>
+</CardGroup>

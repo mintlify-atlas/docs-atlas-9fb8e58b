@@ -1,0 +1,224 @@
+---
+title: Privacy & Data Handling
+description: How Petal handles your data with a local-first approach
+---
+
+Petal is designed with privacy as a core principle, keeping your transcriptions and audio data on your device.
+
+## Local-First Design
+
+<Info>
+  Petal is **designed for local transcription workflows** and keeps the experience on-device where possible.
+</Info>
+
+All transcription processing happens entirely on your Mac. Your audio recordings and transcriptions never leave your device.
+
+## What Stays Local
+
+<CardGroup cols={2}>
+  <Card title="Audio Recordings" icon="microphone">
+    All recordings are processed locally on your Mac using on-device transcription models.
+  </Card>
+
+  <Card title="Transcriptions" icon="file-lines">
+    All transcribed text is generated and stored locally. No transcription data is sent to external servers.
+  </Card>
+
+  <Card title="History" icon="clock-rotate-left">
+    Your transcription history is stored locally on your Mac.
+  </Card>
+
+  <Card title="Settings" icon="gear">
+    All preferences and configurations are stored locally.
+  </Card>
+</CardGroup>
+
+## Network Activity
+
+Petal only connects to the internet for specific purposes:
+
+### Model Downloads
+
+<Note>
+  The **only** network activity is downloading transcription models from **Hugging Face** when you first select a model.
+</Note>
+
+When you choose a transcription model that requires downloading:
+
+1. Petal connects to Hugging Face repositories
+2. Downloads the model files to your Mac
+3. Caches them locally for future use
+
+**Models are downloaded from these Hugging Face repositories:**
+
+- `FluidInference/qwen3-asr-0.6b-coreml/f32` (Qwen3 ASR)
+- `FluidInference/parakeet-tdt-0.6b-v3-coreml` (Parakeet)
+- `argmaxinc/whisperkit-coreml` (Whisper models)
+- `mlx-community/Voxtral-Mini-3B-2507-bf16` (Voxtral BF16)
+- `mzbac/voxtral-mini-3b-8bit` (Voxtral 8-bit)
+
+After the initial download, **no network connection is required** for transcription.
+
+### Software Updates
+
+<Info>
+  Petal uses **Sparkle** for automatic updates. When enabled, the app checks for new versions from the official GitHub repository.
+</Info>
+
+Update checks connect to:
+- `https://raw.githubusercontent.com/Aayush9029/petal/main/appcast.xml`
+
+You can disable automatic update checks in the app's preferences if desired.
+
+## Data Storage
+
+All data is stored locally on your Mac:
+
+### Location
+
+- **Transcription models**: Cached in your local model directory after download
+- **History**: Stored locally using the `HistoryClient`
+- **Temporary audio**: Created during transcription, automatically cleaned up after processing
+
+### Temporary Files
+
+During transcription, Petal may create temporary audio files for processing:
+
+- **Audio trimming**: When silence trimming is enabled
+- **Speed adjustment**: When auto-speed is enabled
+
+<Note>
+  All temporary audio files are **automatically deleted** after transcription completes, whether successful or failed.
+</Note>
+
+From the source code (TranscriptionClient.swift:136-139):
+
+```swift
+defer {
+    for generatedURL in generatedAudioURLs {
+        try? FileManager.default.removeItem(at: generatedURL)
+    }
+}
+```
+
+## User Control
+
+You have complete control over your data:
+
+<CardGroup cols={2}>
+  <Card title="Data Retention" icon="trash">
+    You control how long transcription history is kept and can delete it at any time.
+  </Card>
+
+  <Card title="Model Management" icon="download">
+    You choose which models to download and can remove them to free up disk space.
+  </Card>
+
+  <Card title="Permissions" icon="shield">
+    You grant microphone and accessibility permissions and can revoke them in System Settings at any time.
+  </Card>
+
+  <Card title="Auto-Update" icon="arrow-up">
+    Automatic update checks can be disabled if you prefer manual updates.
+  </Card>
+</CardGroup>
+
+## Permissions Explained
+
+Petal requires two system permissions, both clearly defined in the app:
+
+### Microphone Permission
+
+<Info>
+  **Purpose**: "Petal records audio while you hold your push-to-talk shortcut."
+</Info>
+
+This permission is only used to:
+- Capture audio when you activate the push-to-talk shortcut
+- Process the recording locally for transcription
+
+**Not used for**:
+- Background recording
+- Always-on listening
+- Sending audio to external servers
+
+### Accessibility Permission
+
+<Info>
+  **Purpose**: Required for global keyboard shortcuts to work system-wide.
+</Info>
+
+This permission enables:
+- Push-to-talk shortcuts that work in any application
+- Automatic pasting of transcription results
+
+**Not used for**:
+- Monitoring your activity
+- Accessing other applications' data
+- Tracking keystrokes outside of Petal's shortcuts
+
+## Apple Speech Framework
+
+When using the Apple Speech model (macOS 26+):
+
+<Note>
+  The **Apple Speech** transcriber uses Apple's on-device Speech framework. This is a system-level framework that processes audio locally.
+</Note>
+
+No additional permissions beyond microphone access are required. Apple's privacy policy for the Speech framework applies:
+
+- On-device processing
+- No data sent to Apple servers
+- Uses installed dictation languages from System Settings
+
+## Privacy Statement
+
+From the Petal README:
+
+> Petal is designed for local transcription workflows and keeps the experience on-device where possible.
+
+This means:
+
+1. **No cloud transcription**: All models run locally on your Mac
+2. **No data collection**: Petal does not collect analytics, telemetry, or usage data
+3. **No account required**: No sign-up, login, or user account needed
+4. **No external APIs**: Beyond model downloads, no API calls to external services
+
+<Warning>
+  While Petal itself maintains a strict local-first approach, be aware that downloaded models come from Hugging Face repositories. Review the model licenses and terms before downloading if you have specific compliance requirements.
+</Warning>
+
+## Open Source Transparency
+
+Petal is open source, allowing you to:
+
+- Inspect the complete source code
+- Verify privacy claims
+- Review how permissions are used
+- Understand data flows
+- Build from source if desired
+
+**Repository**: [github.com/Aayush9029/petal](https://github.com/Aayush9029/petal)
+
+<Info>
+  The local-first architecture is visible throughout the codebase, with all transcription clients designed for on-device processing.
+</Info>
+
+## Summary
+
+<CardGroup cols={1}>
+  <Card title="What Petal Does" icon="check" color="#10b981">
+    - Processes all transcriptions on your Mac
+    - Stores history locally
+    - Downloads models from Hugging Face (one-time)
+    - Checks for app updates (optional)
+  </Card>
+
+  <Card title="What Petal Doesn't Do" icon="xmark" color="#ef4444">
+    - Send audio to external servers
+    - Upload transcriptions anywhere
+    - Collect analytics or telemetry
+    - Require user accounts
+    - Monitor activity outside its shortcuts
+  </Card>
+</CardGroup>

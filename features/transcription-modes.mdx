@@ -1,0 +1,159 @@
+---
+title: Transcription Modes
+description: Choose between Verbatim and Smart transcription modes for different use cases
+---
+
+Petal offers two transcription modes to match your needs: **Verbatim** for exact word-for-word transcription, and **Smart** for AI-polished output.
+
+## Mode Overview
+
+<CardGroup cols={2}>
+  <Card title="Verbatim" icon="quote-left">
+    Word-for-word transcription of exactly what was said, including filler words and repetitions
+  </Card>
+  <Card title="Smart" icon="wand-magic-sparkles">
+    AI-refined transcription that cleans up filler words and repeated phrases using a custom prompt
+  </Card>
+</CardGroup>
+
+## Verbatim Mode
+
+Verbatim mode provides an exact transcription of your speech without any modifications.
+
+### When to Use Verbatim
+
+- Recording interviews or conversations where exact wording matters
+- Transcribing legal or medical content
+- When you want complete control over editing
+- Capturing speech patterns or linguistic analysis
+
+### Supported Models
+
+All models support Verbatim mode:
+
+- Apple Speech (Built-in)
+- Qwen3 ASR 0.6B
+- Parakeet TDT 0.6B
+- Whisper Large V3 Turbo
+- Whisper Tiny
+- Voxtral Mini 3B (bf16)
+- Voxtral Mini 3B (8-bit)
+
+<Info>
+Verbatim mode has the fastest processing time since it doesn't require additional AI refinement.
+</Info>
+
+## Smart Mode
+
+Smart mode uses AI to refine your transcription, removing filler words and cleaning up repeated phrases for more polished output.
+
+### How Smart Mode Works
+
+<Steps>
+  <Step title="Initial transcription">
+    Petal transcribes your audio using the selected model
+  </Step>
+  
+  <Step title="AI refinement">
+    The transcription is refined using either:
+    - **Native smart support**: Voxtral models apply the prompt during transcription
+    - **Apple Intelligence**: Other models use Apple's on-device AI for post-processing (requires macOS 15+ and Apple Intelligence enabled)
+  </Step>
+  
+  <Step title="Polished output">
+    The cleaned-up transcription is pasted to your active application
+  </Step>
+</Steps>
+
+### Default Smart Prompt
+
+By default, Smart mode uses this prompt:
+
+```
+Clean up filler words and repeated phrases. Return a polished version of what was said.
+```
+
+<Tip>
+You can customize the smart prompt in Settings to match your specific needs. For example:
+- "Format as bullet points"
+- "Fix grammar and punctuation only"
+- "Summarize the key points"
+</Tip>
+
+### Supported Models
+
+Only Voxtral models support Smart mode natively:
+
+<CardGroup cols={2}>
+  <Card title="Voxtral Mini 3B (bf16)" icon="brain">
+    Native smart transcription with highest quality
+    
+    **Size**: ~9.4 GB
+  </Card>
+  <Card title="Voxtral Mini 3B (8-bit)" icon="brain">
+    Native smart transcription with reduced memory
+    
+    **Size**: ~4.6 GB
+  </Card>
+</CardGroup>
+
+<Warning>
+If you select Smart mode with a model that doesn't support it natively (Apple Speech, Qwen3, Parakeet, or Whisper models), Petal will:
+
+1. Fall back to Verbatim mode if Apple Intelligence is not available
+2. Use Apple Intelligence for post-processing if available (requires macOS 15+ and Apple Intelligence enabled in Settings)
+
+The mode will automatically normalize to Verbatim if neither option is available.
+</Warning>
+
+## Apple Intelligence Integration
+
+For models that don't support Smart mode natively, Petal can use Apple Intelligence for post-processing.
+
+### Requirements
+
+- macOS 15 or later
+- Apple Intelligence enabled in Petal Settings
+- Compatible Mac with Apple Intelligence support
+
+### How It Works
+
+<Steps>
+  <Step title="Verbatim transcription">
+    The model first creates a word-for-word transcription
+  </Step>
+  
+  <Step title="AI refinement stage">
+    The menu bar icon changes to `apple.intelligence` and applies your smart prompt to clean up the text
+  </Step>
+  
+  <Step title="Both versions saved">
+    Petal saves both the original verbatim transcription and the refined version in your history
+  </Step>
+</Steps>
+
+<Info>
+When Apple Intelligence refines a transcription, you'll see a "Refining" stage in the processing flow. Both the original and refined versions are available in your transcription history.
+</Info>
+
+## Changing Modes
+
+You can change transcription modes in Settings:
+
+1. Click the Petal menu bar icon
+2. Click the gear icon to open Settings  
+3. Select your preferred mode from the "Transcription Mode" dropdown
+
+<Note>
+If you select Smart mode but your current model doesn't support it, Petal will automatically fall back to Verbatim mode or use Apple Intelligence if available.
+</Note>
+
+## Performance Comparison
+
+| Feature | Verbatim | Smart (Native) | Smart (Apple Intelligence) |
+|---------|----------|----------------|---------------------------|
+| Processing Speed | Fastest | Medium | Slower |
+| Filler Word Removal | No | Yes | Yes |
+| Custom Prompts | N/A | Yes | Yes |
+| Model Requirements | All models | Voxtral only | macOS 15+ |
+| Offline Support | Yes | Yes | Yes (on-device) |

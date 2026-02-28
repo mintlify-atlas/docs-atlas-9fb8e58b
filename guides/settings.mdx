@@ -1,0 +1,230 @@
+---
+title: Settings
+description: Configure Petal to match your workflow
+icon: gearshape
+---
+
+Petal provides extensive customization options across three settings panes: General, Transcription, and History. Access settings from the menu bar icon.
+
+## General Settings
+
+<Accordion title="Keyboard Shortcut">
+  ### Push to Talk
+  
+  Customize your keyboard shortcut for recording:
+  - **Tap** to toggle recording on/off
+  - **Hold and release** to stop recording immediately
+  
+  ### Hold Duration
+  
+  Set the threshold that determines tap vs. hold behavior:
+  - **Short** (0.4s) - Quick response for rapid workflows
+  - **Medium** (1.0s) - Balanced default
+  - **Long** (2.0s) - Prevents accidental toggles
+  
+  <Info>
+  When you release before the threshold, Petal enters toggle mode and displays "Listening — tap your shortcut to stop."
+  </Info>
+</Accordion>
+
+<Accordion title="Permissions">
+  Petal requires two system permissions to function:
+  
+  ### Microphone Access
+  Required to record audio for transcription. Grant access through the settings interface or System Settings.
+  
+  <Warning>
+  Without microphone permission, recording will fail with an error. Petal will prompt you to enable access in System Settings.
+  </Warning>
+  
+  ### Accessibility Access
+  Required to auto-paste transcriptions into your active application. Without this permission, Petal will copy transcriptions to your clipboard instead.
+  
+  <Tip>
+  If you see "Accessibility access is needed to paste" after transcription, enable this permission in System Settings > Privacy & Security > Accessibility.
+  </Tip>
+</Accordion>
+
+<Accordion title="Clipboard">
+  ### Restore Clipboard After Paste
+  
+  When enabled (default), Petal restores your previous clipboard contents after auto-pasting a transcription.
+  
+  This is useful when:
+  - You have important content on your clipboard
+  - You frequently paste the same content multiple times
+  - You use clipboard managers that expect clipboard persistence
+</Accordion>
+
+<Accordion title="Diagnostics">
+  ### Enable Logs
+  
+  Disabled by default to avoid creating log files unless explicitly needed. Enable this when:
+  - Troubleshooting transcription issues
+  - Reporting bugs to the Petal team
+  - Diagnosing performance problems
+  
+  ### Export Logs
+  
+  Once logging is enabled and logs are generated, use the Export Logs button to save diagnostic information for troubleshooting.
+</Accordion>
+
+## Transcription Settings
+
+<Accordion title="Model Selection">
+  Choose from multiple transcription models with different performance characteristics:
+  
+  - **Apple Speech** (Built-in, macOS 26+) - No download required
+  - **Qwen3 ASR 0.6B** (Recommended) - Fast multilingual, ~2.5 GB
+  - **Parakeet TDT 0.6B** - Top leaderboard accuracy, 110x real-time speed
+  - **Whisper Large V3 Turbo** - 99 languages, ~1.6 GB
+  - **Whisper Tiny** - Smallest/fastest, ~150 MB
+  - **Voxtral Mini 3B** - Smart transcription with native Q&A support
+  
+  <Info>
+  Models requiring download show a "Download Model" button. Downloaded models display a green checkmark. You can delete downloaded models to free up disk space.
+  </Info>
+  
+  After changing models, Petal automatically warms up the new model for optimal performance.
+</Accordion>
+
+<Accordion title="Audio Preprocessing">
+  ### Trim Silence
+  
+  Removes silent segments from the start and end of your recording before transcription. This can:
+  - Speed up transcription
+  - Improve accuracy by removing dead air
+  - Reduce storage size for history
+  
+  ### Auto Speed-up
+  
+  Speeds up quiet or low-energy audio segments to reduce transcription time without affecting quality. Particularly useful for:
+  - Long pauses between sentences
+  - Recordings with extended silence
+  - Variable-pace speech
+</Accordion>
+
+<Accordion title="Apple Intelligence">
+  Available on macOS 26+ with Apple Intelligence enabled.
+  
+  ### Enhance with Apple Intelligence
+  
+  Post-processes transcriptions on-device to fix:
+  - Grammar and punctuation
+  - Formatting and capitalization
+  - Sentence structure
+  
+  <Note>
+  When enabled, this feature enables Smart mode for all models, even those that don't natively support it (like Whisper and Qwen).
+  </Note>
+  
+  <Warning>
+  Requires macOS 26 with Apple Intelligence enabled in System Settings.
+  </Warning>
+</Accordion>
+
+<Accordion title="Transcription Mode">
+  Choose how Petal processes your speech:
+  
+  ### Verbatim Mode
+  Word-for-word transcription with no post-processing. Use when:
+  - You need exact wording
+  - Dictating code or technical content
+  - Recording conversations verbatim
+  
+  ### Smart Mode
+  Refines transcription using a custom prompt. Available when:
+  - Using Voxtral models (native support)
+  - Using any model with Apple Intelligence enabled
+  
+  <Info>
+  When using Smart mode with non-Voxtral models, Apple Intelligence post-processes the verbatim transcript according to your smart prompt.
+  </Info>
+</Accordion>
+
+<Accordion title="Smart Prompt">
+  Customize how Smart mode refines your transcriptions. The default prompt is:
+  
+  > Clean up filler words and repeated phrases. Return a polished version of what was said.
+  
+  You can modify this to:
+  - Format transcriptions as bullet points
+  - Summarize lengthy recordings
+  - Apply specific writing styles
+  - Extract action items or key points
+  
+  <Tip>
+  Smart prompts work best with clear, specific instructions. Experiment with different prompts to find what works for your workflow.
+  </Tip>
+</Accordion>
+
+## History Settings
+
+<Accordion title="Retention Mode">
+  Control what Petal saves from your transcriptions:
+  
+  - **Off** - No history saved
+  - **Transcripts** - Text only, no audio files
+  - **Audio** - Audio recordings only, no text
+  - **Audio + Transcripts** (Default) - Both audio and text
+  
+  <Note>
+  Changing retention mode cleans up existing files that don't match the new mode. For example, switching from "Audio + Transcripts" to "Transcripts" deletes all audio files.
+  </Note>
+</Accordion>
+
+<Accordion title="Compression">
+  ### Extra Compression
+  
+  History audio is saved as AAC (.m4a) by default at standard quality:
+  - **Standard**: 22,050 Hz sample rate, 64 kbps bitrate
+  - **Extra compression**: 16,000 Hz sample rate, 24 kbps bitrate
+  
+  Enable extra compression when:
+  - Disk space is limited
+  - You have many saved recordings
+  - Audio quality for playback is less important
+</Accordion>
+
+<Accordion title="Storage Location">
+  History files are stored at:
+  
+  ```
+  ~/Documents/petal/history/
+  ├── media/          # Audio files (.m4a)
+  ├── transcripts/    # Text files (.txt)
+  └── history.json    # Metadata index
+  ```
+  
+  Use "Open in Finder" to access your history folder directly.
+</Accordion>
+
+<Accordion title="Clear Data">
+  Two options for clearing history:
+  
+  ### Delete All History & Media
+  Permanently removes:
+  - All transcription history entries
+  - All audio files
+  - All transcript text files
+  
+  ### Delete Media Only
+  Removes all audio files while keeping:
+  - Transcription history entries
+  - Transcript text files
+  
+  <Warning>
+  Both operations are permanent and cannot be undone. Your files will be deleted from disk immediately.
+  </Warning>
+</Accordion>
+
+## Recent History
+
+The History settings pane shows your 20 most recent transcriptions with:
+- Preview of transcript text (truncated)
+- Relative timestamp ("5 minutes ago")
+- Quick copy button to copy the transcript
+
+<Tip>
+Click the copy icon next to any recent entry to copy its transcript to your clipboard without leaving settings.
+</Tip>

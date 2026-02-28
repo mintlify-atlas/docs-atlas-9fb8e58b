@@ -1,0 +1,132 @@
+---
+title: Installation
+description: Download and install Petal on your Mac
+---
+
+# Installing Petal
+
+Get Petal running on your Mac in just a few steps.
+
+## Download
+
+<Steps>
+  <Step title="Download the latest version">
+    Download the latest Petal release from the [GitHub releases page](https://github.com/Aayush9029/petal/releases/latest).
+    
+    Look for the `.dmg` file in the release assets.
+  </Step>
+  
+  <Step title="Open the DMG file">
+    Once downloaded, open the `.dmg` file. This will mount the disk image and show you the Petal app.
+  </Step>
+  
+  <Step title="Move to Applications">
+    Drag the Petal app icon into your Applications folder.
+    
+    <Note>
+    Moving to Applications ensures Petal can auto-update and run properly with system permissions.
+    </Note>
+  </Step>
+  
+  <Step title="Launch Petal">
+    Open Petal from your Applications folder or Spotlight (Cmd + Space, then type "Petal").
+    
+    If you see a security warning about an unidentified developer, go to **System Settings > Privacy & Security** and click "Open Anyway".
+  </Step>
+</Steps>
+
+## Required Permissions
+
+Petal needs two permissions to function properly:
+
+### Microphone Access
+
+Petal records audio while you hold your push-to-talk shortcut.
+
+<Steps>
+  <Step title="Grant microphone permission">
+    When you first launch Petal, macOS will prompt you to grant microphone access.
+    
+    Click **OK** to allow Petal to access your microphone.
+  </Step>
+  
+  <Step title="Manual grant (if needed)">
+    If you accidentally denied access, you can grant it manually:
+    
+    1. Open **System Settings**
+    2. Go to **Privacy & Security > Microphone**
+    3. Enable the toggle next to **Petal**
+  </Step>
+</Steps>
+
+<Info>
+Petal only accesses your microphone when you actively hold down the push-to-talk shortcut. Recording stops immediately when you release the key.
+</Info>
+
+### Accessibility Access
+
+Accessibility permission allows Petal to listen for the global keyboard shortcut (default: Option + Space) even when other apps are active.
+
+<Steps>
+  <Step title="Open accessibility settings">
+    Click **Enable Accessibility Access** from the Petal menu bar icon, or:
+    
+    1. Open **System Settings**
+    2. Go to **Privacy & Security > Accessibility**
+  </Step>
+  
+  <Step title="Grant permission to Petal">
+    Click the **+** button and add Petal from your Applications folder.
+    
+    Or enable the toggle next to Petal if it's already in the list.
+  </Step>
+  
+  <Step title="Restart Petal">
+    After granting accessibility permission, restart Petal for the changes to take effect.
+  </Step>
+</Steps>
+
+<Warning>
+Without accessibility permission, the global keyboard shortcut won't work. You'll need to use the menu bar to start recordings instead.
+</Warning>
+
+## Verifying Installation
+
+Once installed, you should see the Petal icon in your menu bar at the top-right of your screen.
+
+Click the icon to verify:
+- ✅ Status shows "Ready" (not showing permission warnings)
+- ✅ Menu bar shows Settings and About options
+- ✅ No error messages displayed
+
+If you see permission warnings in the menu, follow the steps above to grant the required permissions.
+
+## Automatic Updates
+
+Petal uses Sparkle for automatic updates. When a new version is available:
+
+1. Petal will notify you with a dialog
+2. Click **Install Update** to download and install automatically
+3. Petal will restart with the new version
+
+You can also manually check for updates by clicking **Check for Updates** in the Petal menu.
+
+<Note>
+Automatic update checks are enabled by default. You can disable them in Settings if preferred.
+</Note>
+
+## Uninstalling
+
+To remove Petal from your Mac:
+
+1. Quit Petal from the menu bar (click icon > Quit Petal)
+2. Move Petal from Applications to Trash
+3. Optionally, remove settings and history:
+   ```bash
+   rm -rf ~/Library/Application\ Support/com.optimalapps.petal
+   rm -rf ~/Library/Caches/com.optimalapps.petal
+   ```
+
+## Next Steps
+
+Now that Petal is installed, continue to the [Quickstart](/quickstart) guide to record your first transcription.

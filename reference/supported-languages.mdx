@@ -1,0 +1,93 @@
+---
+title: Supported Languages
+description: Language support across Petal's transcription models
+---
+
+Petal supports multiple languages depending on which transcription model you choose. Each model has different language capabilities and strengths.
+
+## Language Support by Model
+
+<CardGroup cols={2}>
+  <Card title="Apple Speech" icon="apple">
+    Language support depends on your installed dictation languages in System Settings.
+    
+    **Configuration Required:**
+    - Go to System Settings → Keyboard → Dictation
+    - Add the languages you want to transcribe
+    - Petal will use your installed dictation languages
+  </Card>
+
+  <Card title="Qwen3 ASR" icon="language" color="#7C3AED">
+    **30+ languages** including Chinese dialects
+    
+    Fast multilingual transcription with broad language coverage.
+  </Card>
+
+  <Card title="Parakeet TDT 0.6B" icon="microphone">
+    **English-focused** transcription
+    
+    Optimized for English with top-ranked accuracy and 110x real-time speed.
+  </Card>
+
+  <Card title="Whisper Models" icon="globe">
+    **99 languages** supported
+    
+    Both Whisper Large V3 Turbo and Whisper Tiny support the same extensive language set.
+  </Card>
+
+  <Card title="Voxtral Models" icon="brain">
+    **Multilingual** capabilities
+    
+    Both BF16 and 8-bit variants support multiple languages with advanced transcription features.
+  </Card>
+</CardGroup>
+
+## Choosing the Right Model
+
+<Note>
+  For the broadest language support, use **Whisper Large V3 Turbo** (99 languages) or **Qwen3 ASR** (30+ languages including Chinese dialects).
+</Note>
+
+<Info>
+  **Apple Speech** requires no model download but depends on which dictation languages you've installed in System Settings. Check System Settings → Keyboard → Dictation to see available languages.
+</Info>
+
+### Recommended Models by Use Case
+
+| Use Case | Recommended Model | Why |
+|----------|------------------|-----|
+| English transcription | Parakeet TDT 0.6B | Fastest with top accuracy |
+| Multilingual (many languages) | Whisper Large V3 Turbo | 99 language support |
+| Chinese + Asian languages | Qwen3 ASR | Includes Chinese dialects |
+| No model download | Apple Speech | Built-in, uses system languages |
+| Resource-constrained | Whisper Tiny | Smallest download (~150 MB) |
+
+## Adding Languages to Apple Speech
+
+If you're using the Apple Speech model, follow these steps to add language support:
+
+1. Open **System Settings**
+2. Navigate to **Keyboard** → **Dictation**
+3. Click the **+** button to add a new dictation language
+4. Select your desired languages
+5. Petal will automatically detect and use these languages for transcription
+
+<Warning>
+  Apple Speech is only available on macOS 26 or later. If you're on an earlier version of macOS, this model will not appear in Petal.
+</Warning>
+
+## Model Download Sizes
+
+All models except Apple Speech require downloading before first use:
+
+- **Apple Speech**: No download required (built-in)
+- **Qwen3 ASR**: ~2.5 GB
+- **Parakeet TDT 0.6B**: Not specified (CoreML format)
+- **Whisper Large V3 Turbo**: ~1.6 GB
+- **Whisper Tiny**: ~150 MB
+- **Voxtral Mini 3B (BF16)**: ~9.4 GB
+- **Voxtral Mini 3B (8-bit)**: ~4.6 GB
+
+<Info>
+  Models are downloaded from Hugging Face on first use and cached locally for future transcriptions.
+</Info>

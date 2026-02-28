@@ -1,0 +1,293 @@
+---
+title: 'Downloading Models'
+description: 'How to download and manage transcription models in Petal'
+icon: 'download'
+---
+
+Most transcription models in Petal require a one-time download before use. This guide covers everything you need to know about downloading, managing, and deleting models.
+
+## Which Models Require Downloads?
+
+<CardGroup cols={2}>
+  <Card title="No Download Required" icon="circle-check" iconType="solid" color="#10B981">
+    **Apple Speech**
+    
+    Built into macOS 26+ on supported Macs. Available immediately without any download.
+  </Card>
+  
+  <Card title="Download Required" icon="cloud-arrow-down" iconType="solid" color="#3B82F6">
+    **All Other Models**
+    
+    Qwen3, Parakeet, Whisper, and Voxtral models all require downloading before first use.
+  </Card>
+</CardGroup>
+
+<Info>
+Apple Speech only appears in your model list if your Mac supports it. The system automatically detects compatibility.
+</Info>
+
+## Model Download Sizes
+
+Plan your downloads based on available storage:
+
+| Model | Download Size | Free Space Needed |
+|-------|---------------|-------------------|
+| Whisper Tiny | ~150 MB | ~200 MB |
+| Whisper Large V3 Turbo | ~1.6 GB | ~2 GB |
+| Qwen3 ASR 0.6B | ~2.5 GB | ~3 GB |
+| Voxtral Mini 3B (8-bit) | ~4.6 GB | ~5.5 GB |
+| Voxtral Mini 3B (bf16) | ~9.4 GB | ~11 GB |
+| Parakeet TDT 0.6B | Size varies | TBD |
+
+<Note>
+It's recommended to have 20-30% more free space than the model size for optimal download and installation.
+</Note>
+
+## How to Download Models
+
+### During Initial Setup
+
+When you first launch Petal, you'll see an onboarding flow:
+
+1. **Select a model** from the available options
+2. Click **Download Model** to begin
+3. Wait for the download to complete
+4. Click **Finish Setup** to start using Petal
+
+<Accordion title="Download Progress Information">
+  During download, you'll see:
+  - **Progress bar**: Visual indicator of download completion
+  - **Percentage**: Exact completion percentage (0-100%)
+  - **Speed**: Current download speed (e.g., "5.2 MB/s")
+  - **Status**: Current operation (preparing, downloading, installing)
+</Accordion>
+
+### After Initial Setup
+
+You can download additional models anytime:
+
+1. Open **Petal Settings**
+2. Navigate to **Models** section
+3. Select a model from the dropdown
+4. If the model isn't downloaded, click **Download**
+5. Wait for download to complete
+
+## Download States
+
+Models progress through several states during download:
+
+<Steps>
+  <Step title="Not Downloaded">
+    Model is available but not yet on your system. Click Download to begin.
+  </Step>
+  
+  <Step title="Preparing">
+    Download is initializing. Petal is setting up the download connection.
+  </Step>
+  
+  <Step title="Downloading">
+    Active download in progress. You'll see progress percentage and speed.
+  </Step>
+  
+  <Step title="Downloaded">
+    Model is fully downloaded and ready to use. You can now start transcribing.
+  </Step>
+</Steps>
+
+## Managing Downloads
+
+### Pausing Downloads
+
+You can pause an active download:
+
+1. Click **Pause** during download
+2. The download will pause at current progress
+3. Click **Resume** to continue from where you left off
+
+<Info>
+Paused downloads retain their progress. You won't need to restart from the beginning.
+</Info>
+
+### Canceling Downloads
+
+To cancel a download completely:
+
+1. Click **Cancel** during download
+2. The partial download will be removed
+3. You'll need to restart the download from the beginning if you want to try again
+
+<Warning>
+Canceling a download removes all progress. Use Pause instead if you plan to resume later.
+</Warning>
+
+### Deleting Models
+
+To free up storage space, you can delete downloaded models:
+
+1. Go to **Petal Settings** → **Models**
+2. Select the model you want to delete
+3. Click **Delete Model**
+4. Confirm the deletion
+
+<Note>
+Deleting a model removes it from your system but keeps it available for re-download. You won't lose the ability to use it later.
+</Note>
+
+## Download Troubleshooting
+
+### Download Failed
+
+If a download fails:
+
+<Accordion title="Check Internet Connection">
+  - Ensure you have stable internet connectivity
+  - Try pausing and resuming the download
+  - Check if your firewall is blocking downloads
+</Accordion>
+
+<Accordion title="Insufficient Storage">
+  - Verify you have enough free disk space
+  - See model sizes above for space requirements
+  - Delete unused models to free up space
+</Accordion>
+
+<Accordion title="Download Speed Issues">
+  - Large models can take time on slower connections
+  - Pause other downloads/uploads for faster speeds
+  - Try downloading during off-peak hours
+</Accordion>
+
+<Accordion title="aria2 Binary Missing">
+  If you see an "aria2 binary missing" error:
+  - This indicates a missing download component
+  - Try reinstalling Petal
+  - Contact support if the issue persists
+</Accordion>
+
+### Download Taking Too Long
+
+Estimated download times by connection speed:
+
+**For Qwen3 ASR (~2.5 GB)**:
+- 100 Mbps: ~3-4 minutes
+- 50 Mbps: ~7-8 minutes
+- 25 Mbps: ~13-15 minutes
+
+**For Voxtral bf16 (~9.4 GB)**:
+- 100 Mbps: ~12-15 minutes
+- 50 Mbps: ~25-30 minutes
+- 25 Mbps: ~50-60 minutes
+
+<Info>
+Download times vary based on server load and network conditions. The app shows estimated speed during download.
+</Info>
+
+## Where Models Are Stored
+
+Downloaded models are stored locally on your Mac:
+
+- Models are cached in your system's application support directory
+- Each model has its own directory with all necessary files
+- Models persist between app launches
+- Deleting Petal does not automatically delete downloaded models
+
+<Warning>
+Model directories can be large. Use the built-in delete function rather than manually removing files.
+</Warning>
+
+## Download Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Start Small" icon="seedling">
+    Download smaller models first (Whisper Tiny, Qwen3) to test functionality before committing to large downloads.
+  </Card>
+  
+  <Card title="Use Wi-Fi" icon="wifi">
+    Download models over Wi-Fi rather than cellular to avoid data charges and ensure faster speeds.
+  </Card>
+  
+  <Card title="Monitor Space" icon="hard-drive">
+    Keep an eye on available storage. Having multiple large models can consume significant space.
+  </Card>
+  
+  <Card title="Keep Favorites" icon="heart">
+    Download and keep 2-3 models for different use cases rather than constantly downloading and deleting.
+  </Card>
+</CardGroup>
+
+## Multiple Model Management
+
+You can have multiple models downloaded simultaneously:
+
+- **Switch instantly** between downloaded models
+- **No re-download** needed when switching
+- **Compare performance** across different models
+- **Choose per task** - use fast models for quick notes, accurate models for important content
+
+<Note>
+Each model operates independently. Downloading a new model doesn't affect existing models.
+</Note>
+
+## Recommended Downloads by Use Case
+
+<Accordion title="Getting Started (First Model)">
+  **Recommended**: Qwen3 ASR 0.6B (~2.5 GB)
+  
+  - Excellent all-around performance
+  - Reasonable size
+  - Default recommended model
+  - Good for testing Petal's capabilities
+</Accordion>
+
+<Accordion title="Adding Speed Option">
+  **Recommended**: Parakeet TDT 0.6B
+  
+  - Fastest transcription speed
+  - Top-ranked accuracy
+  - Perfect complement to Qwen3
+  - Use for quick voice memos
+</Accordion>
+
+<Accordion title="Adding Accuracy Option">
+  **Recommended**: Whisper Large V3 Turbo (~1.6 GB)
+  
+  - Maximum accuracy
+  - 99 language support
+  - Use for important transcriptions
+  - Worth the extra storage
+</Accordion>
+
+<Accordion title="Adding Smart Features">
+  **Recommended**: Voxtral Mini 3B 8-bit (~4.6 GB)
+  
+  - Q&A and summarization capabilities
+  - Lower memory than bf16 version
+  - Unique features unavailable elsewhere
+  - Great for content analysis
+</Accordion>
+
+## Privacy and Security
+
+All model downloads are secure:
+
+- Models are downloaded from trusted sources
+- All downloads use secure connections
+- Models run entirely locally on your device
+- No model data is sent to external servers
+- Your audio never leaves your Mac during transcription
+
+<Info>
+Petal's local-first design means downloaded models stay on your device and process audio without internet connectivity.
+</Info>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Model Overview" icon="grid-2" href="/models/overview">
+    Review all available models and their specifications
+  </Card>
+  
+  <Card title="Choosing a Model" icon="compass" href="/models/choosing-a-model">
+    Learn which model is right for your needs
+  </Card>
+</CardGroup>

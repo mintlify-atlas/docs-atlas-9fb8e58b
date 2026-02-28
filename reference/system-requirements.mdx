@@ -1,0 +1,151 @@
+---
+title: System Requirements
+description: Hardware and software requirements for running Petal
+---
+
+Petal is designed exclusively for macOS and requires specific system configurations to run properly.
+
+## Minimum Requirements
+
+### Operating System
+
+<CardGroup cols={1}>
+  <Card title="macOS 15 (Sequoia) or later" icon="apple">
+    Petal requires **macOS 15.0** or newer to run. Earlier versions of macOS are not supported.
+  </Card>
+</CardGroup>
+
+<Note>
+  The **Apple Speech** model specifically requires **macOS 26 or later** and will not be available on macOS 15.
+</Note>
+
+### Hardware
+
+<CardGroup cols={2}>
+  <Card title="Apple Silicon Mac" icon="chip">
+    **Recommended** for optimal performance with MLX models
+    
+    All transcription models are optimized for Apple Silicon and use CoreML for on-device inference.
+  </Card>
+
+  <Card title="Disk Space" icon="hard-drive">
+    Varies by model choice
+    
+    See model sizes below to plan your storage needs.
+  </Card>
+</CardGroup>
+
+## Required Permissions
+
+Petal requires two critical system permissions to function:
+
+<Warning>
+  You **must** grant both permissions during the onboarding process. Without these permissions, Petal cannot record or transcribe audio.
+</Warning>
+
+### 1. Microphone Access
+
+**Purpose**: Petal records audio while you hold your push-to-talk shortcut.
+
+**How to grant**:
+- Petal will prompt you during first launch
+- Or go to **System Settings** → **Privacy & Security** → **Microphone**
+- Enable the toggle for Petal
+
+<Info>
+  The microphone permission is defined in `Info.plist` as:
+  
+  `"Petal records audio while you hold your push-to-talk shortcut."`
+</Info>
+
+### 2. Accessibility Access
+
+**Purpose**: Required for global keyboard shortcuts to work system-wide.
+
+**How to grant**:
+- Petal will prompt you during onboarding
+- Or go to **System Settings** → **Privacy & Security** → **Accessibility**
+- Enable the toggle for Petal
+
+<Warning>
+  Without Accessibility permission, Petal's push-to-talk keyboard shortcuts will not function.
+</Warning>
+
+## Model Storage Requirements
+
+Different transcription models require varying amounts of disk space:
+
+| Model | Download Size | Notes |
+|-------|--------------|-------|
+| Apple Speech | No download | Built-in to macOS 26+ |
+| Qwen3 ASR 0.6B | ~2.5 GB | Default recommended model |
+| Parakeet TDT 0.6B | CoreML format | Size varies |
+| Whisper Large V3 Turbo | ~1.6 GB | High accuracy |
+| Whisper Tiny | ~150 MB | Smallest option |
+| Voxtral Mini 3B (BF16) | ~9.4 GB | Largest, best quality |
+| Voxtral Mini 3B (8-bit) | ~4.6 GB | Quantized version |
+
+<Info>
+  Models are downloaded from **Hugging Face** on first use and stored locally. Plan your disk space accordingly based on which models you want to use.
+</Info>
+
+## Performance Considerations
+
+### Apple Silicon Optimization
+
+All models use CoreML and are optimized for Apple Silicon Macs. Performance characteristics:
+
+- **Speed Score**: How fast the model transcribes (1-5 scale)
+- **Smart Score**: Transcription quality and intelligence (1-5 scale)
+
+| Model | Speed Score | Smart Score |
+|-------|-------------|-------------|
+| Apple Speech | 5 | 3 |
+| Qwen3 ASR | 4 | 4 |
+| Parakeet TDT | 5 | 4 |
+| Whisper Large V3 Turbo | 2 | 5 |
+| Whisper Tiny | 4 | 2 |
+| Voxtral Mini 3B (BF16) | 2 | 5 |
+| Voxtral Mini 3B (8-bit) | 3 | 4 |
+
+<Note>
+  For fastest transcription, choose **Apple Speech** (macOS 26+) or **Parakeet TDT 0.6B**.
+  
+  For best quality, choose **Whisper Large V3 Turbo** or **Voxtral Mini 3B (BF16)**.
+</Note>
+
+## Checking Your System
+
+### Verify macOS Version
+
+1. Click the Apple menu () → **About This Mac**
+2. Check that your macOS version is **15.0 or later**
+3. For Apple Speech support, you need **macOS 26 or later**
+
+### Verify Permissions
+
+You can check granted permissions at any time:
+
+1. Open **System Settings**
+2. Go to **Privacy & Security**
+3. Check both **Microphone** and **Accessibility** sections
+4. Ensure Petal is enabled in both lists
+
+<Warning>
+  If you denied permissions during initial setup, you must grant them manually in System Settings. Petal cannot function without both Microphone and Accessibility permissions.
+</Warning>
+
+## Installation Requirements
+
+Beyond system requirements, installation is straightforward:
+
+1. Download the latest `.dmg` from the [releases page](https://github.com/Aayush9029/petal/releases/latest)
+2. Open the `.dmg` file
+3. Drag Petal to your **Applications** folder
+4. Launch Petal
+5. Grant the required permissions when prompted
+6. Download your preferred transcription model
+
+<Info>
+  Petal uses **Sparkle** for automatic updates. When enabled, the app will check for updates automatically and notify you when new versions are available.
+</Info>

@@ -1,0 +1,314 @@
+---
+title: History
+description: View, manage, and export your transcription history
+icon: clock
+---
+
+Petal maintains a comprehensive history of your transcriptions, storing both the text and original audio files (based on your retention settings).
+
+## How History Works
+
+Every transcription is automatically saved with detailed metadata:
+
+- **Transcript text** - The final transcription result
+- **Audio recording** - Original or compressed audio file
+- **Timestamp** - When the recording was made
+- **Model used** - Which transcription model processed it
+- **Transcription mode** - Verbatim or Smart
+- **Duration** - Length of the audio recording
+- **Processing time** - How long transcription took
+- **Paste result** - Whether auto-paste succeeded
+
+<Info>
+Petal groups history entries by day and stores up to 200 entries per day. Older entries are automatically removed when this limit is reached.
+</Info>
+
+## Retention Modes
+
+Control what Petal saves by choosing a retention mode in Settings > History:
+
+<Accordion title="Off">
+  No history is saved. Use this when:
+  - Privacy is paramount
+  - You're transcribing sensitive information
+  - You don't need to reference past transcriptions
+  
+  <Warning>
+  When switched to "Off", Petal immediately deletes all existing history files and folders.
+  </Warning>
+</Accordion>
+
+<Accordion title="Transcripts Only">
+  Saves text transcriptions but not audio files.
+  
+  **What's saved:**
+  - Transcript text files (.txt)
+  - Metadata (model, duration, timestamp, etc.)
+  
+  **What's not saved:**
+  - Audio recordings
+  
+  **Storage impact:** Minimal (~1-5 KB per transcription)
+  
+  **Use when:**
+  - You need searchable history
+  - Disk space is limited
+  - You don't need to replay audio
+</Accordion>
+
+<Accordion title="Audio Only">
+  Saves audio recordings but not text transcriptions.
+  
+  **What's saved:**
+  - Audio files (.m4a)
+  - Basic metadata (timestamp, duration)
+  
+  **What's not saved:**
+  - Transcript text
+  
+  **Storage impact:** Moderate (~100-500 KB per minute)
+  
+  **Use when:**
+  - You want to re-transcribe with different models
+  - Audio is the primary artifact
+  - You need proof of original recordings
+</Accordion>
+
+<Accordion title="Audio + Transcripts (Default)">
+  Saves both audio and text for complete history.
+  
+  **What's saved:**
+  - Audio files (.m4a)
+  - Transcript text files (.txt)
+  - Full metadata
+  
+  **Storage impact:** Full (~100-500 KB per minute + text)
+  
+  **Use when:**
+  - You need complete records
+  - Verifying transcription accuracy is important
+  - You might re-process recordings later
+</Accordion>
+
+## History Storage
+
+### File Organization
+
+Petal stores history in a structured directory:
+
+```
+~/Documents/petal/history/
+├── history.json              # Index with all metadata
+├── media/                    # Audio recordings
+│   └── 20260228-143022-qwen3-asr-0.6b-4bit.m4a
+└── transcripts/              # Transcript text files
+    ├── 20260228-143022-qwen3-asr-0.6b-4bit-verbatim.txt
+    └── 20260228-143022-qwen3-asr-0.6b-4bit-smart.txt
+```
+
+<Note>
+When using Smart mode with Apple Intelligence, Petal saves two transcript variants: the original verbatim transcription and the AI-refined version.
+</Note>
+
+### File Naming
+
+Files follow this naming pattern:
+
+```
+YYYYMMDD-HHMMSS-{model-id}-{mode}.{ext}
+```
+
+**Example:**
+```
+20260228-143022-qwen3-asr-0.6b-4bit-verbatim.txt
+```
+
+This makes it easy to:
+- Sort files chronologically
+- Identify which model was used
+- Distinguish between transcription modes
+
+### Compression
+
+Audio files are automatically compressed to AAC format (.m4a) when saved:
+
+<Steps>
+  <Step title="Standard Compression (Default)">
+    - Sample rate: 22,050 Hz
+    - Bitrate: 64 kbps
+    - Good balance of quality and size
+    - ~4-8 MB per hour of audio
+  </Step>
+  
+  <Step title="Extra Compression (Optional)">
+    - Sample rate: 16,000 Hz  
+    - Bitrate: 24 kbps
+    - Smaller file size, reduced quality
+    - ~1.5-3 MB per hour of audio
+    
+    Enable in Settings > History > Extra compression
+  </Step>
+</Steps>
+
+<Tip>
+Even with standard compression, Petal reduces file sizes by 70-90% compared to raw recordings while maintaining sufficient quality for transcription verification.
+</Tip>
+
+## Viewing History
+
+### Recent Entries (Settings)
+
+Access your 20 most recent transcriptions directly in Settings > History:
+
+- View transcript preview (truncated to 2 lines)
+- See relative timestamps ("5 minutes ago", "2 hours ago")
+- Quick copy to clipboard with one click
+
+### Full History (Finder)
+
+Click "Open in Finder" in Settings > History to access the complete history folder where you can:
+
+- Browse all saved files
+- Search transcript text files
+- Play audio recordings
+- Sort by date, size, or name
+- Export specific files
+
+## Exporting History
+
+Since history is stored as standard files, you can easily export or back up your data:
+
+<Steps>
+  <Step title="Open History Folder">
+    Settings > History > Open in Finder
+  </Step>
+  
+  <Step title="Select Files">
+    Choose specific files or copy the entire `history` folder
+  </Step>
+  
+  <Step title="Export">
+    Copy files to:
+    - External drive for backup
+    - Cloud storage (Dropbox, iCloud, etc.)
+    - Archive for long-term storage
+  </Step>
+</Steps>
+
+<Note>
+The `history.json` file is required for Petal to recognize and display your history. If you restore files, make sure to include this index file.
+</Note>
+
+## Managing Storage
+
+### Check Disk Usage
+
+To see how much space your history is using:
+
+1. Open history folder (Settings > History > Open in Finder)
+2. Right-click the `history` folder
+3. Select "Get Info"
+4. View "Size" field
+
+### Clear History
+
+Petal provides two cleanup options:
+
+<Accordion title="Delete All History & Media">
+  **Removes:**
+  - All transcription history entries
+  - All audio files in `media/`
+  - All transcript files in `transcripts/`
+  - The `history.json` index
+  
+  **Use when:**
+  - You want a fresh start
+  - Freeing maximum disk space
+  - Clearing sensitive data
+  
+  <Warning>
+  This operation cannot be undone. All files are permanently deleted.
+  </Warning>
+</Accordion>
+
+<Accordion title="Delete Media Only">
+  **Removes:**
+  - All audio files in `media/`
+  
+  **Keeps:**
+  - Transcript text files
+  - History entries (visible in Recent list)
+  - The `history.json` index
+  
+  **Use when:**
+  - You need to free space but want to keep transcripts
+  - Audio files are large and no longer needed
+  - You only reference text, not recordings
+  
+  <Tip>
+  This is a good middle-ground option when disk space is tight but you still want searchable history.
+  </Tip>
+</Accordion>
+
+## Privacy Considerations
+
+<Warning>
+All transcription processing happens **on-device**. Your audio and transcripts are never sent to external servers.
+</Warning>
+
+### File Protection
+
+Petal applies macOS file protection to history files:
+- Files are encrypted at rest (if FileVault is enabled)
+- Protection level: `completeUntilFirstUserAuthentication`
+- Accessible after first login, even when locked
+
+### Deleting Sensitive Data
+
+If you've transcribed sensitive information:
+
+1. **Immediate cleanup**: Settings > History > Delete All History & Media
+2. **Verify deletion**: Check that `~/Documents/petal/history/` is empty
+3. **Consider retention mode**: Switch to "Off" for future sessions
+
+<Tip>
+For maximum privacy during sensitive work, set retention to "Off" before recording. This prevents any files from being saved.
+</Tip>
+
+## Troubleshooting History
+
+<Accordion title="History not showing recent transcriptions">
+  **Possible causes:**
+  - Retention mode is set to "Off"
+  - Disk is full (check available space)
+  - History folder permissions issue
+  
+  **Solutions:**
+  1. Check Settings > History > Retention mode
+  2. Verify disk space availability
+  3. Try opening history folder in Finder to check permissions
+</Accordion>
+
+<Accordion title="Missing audio or transcript files">
+  **Possible causes:**
+  - Retention mode changed (cleans up non-matching files)
+  - Files manually deleted from Finder
+  - Incomplete transcription (error during saving)
+  
+  **Solutions:**
+  - Check retention mode setting
+  - Petal "heals" history by removing entries with missing files on next launch
+  - Future transcriptions will save correctly
+</Accordion>
+
+<Accordion title="Can't open history folder">
+  **Possible causes:**
+  - First transcription hasn't been made yet
+  - Retention mode is "Off"
+  - Permissions issue
+  
+  **Solutions:**
+  1. Make at least one transcription with retention enabled
+  2. Check that retention mode is not "Off"
+  3. Manually navigate to `~/Documents/petal/history/` in Finder
+</Accordion>

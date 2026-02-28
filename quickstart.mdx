@@ -1,80 +1,227 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: Quickstart
+description: Get from installation to your first transcription in minutes
 ---
 
-## Get started in three steps
+# Quickstart Guide
 
-Get your documentation site running locally and make your first customization.
-
-### Step 1: Set up your local environment
-
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
-
-<CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
-</CardGroup>
+This guide will walk you through recording and transcribing your first audio with Petal.
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+Before starting, make sure you've completed the [Installation](/installation) steps and granted the required permissions.
 </Note>
+
+## Get Your First Transcription
+
+<Steps>
+  <Step title="Launch Petal">
+    Open Petal from your Applications folder. You'll see the Petal icon appear in your menu bar at the top-right of your screen.
+    
+    The icon indicates Petal's status:
+    - **Ready** - All set to record
+    - **Recording** - Currently capturing audio
+    - **Transcribing** - Processing your audio
+  </Step>
+  
+  <Step title="Grant permissions">
+    If this is your first time launching Petal, you'll be prompted to grant two permissions:
+    
+    **Microphone Access**: Click **OK** when macOS asks for microphone permission.
+    
+    **Accessibility Access**: Click **Enable Accessibility Access** from the Petal menu, then add Petal in System Settings > Privacy & Security > Accessibility.
+    
+    <Info>
+    See the [Installation](/installation#required-permissions) guide for detailed permission instructions.
+    </Info>
+  </Step>
+  
+  <Step title="Choose a transcription model">
+    Click the Petal menu bar icon and select **Settings**.
+    
+    On first launch, Petal will guide you through onboarding where you can select a transcription model:
+    
+    - **Qwen3 ASR 0.6B** (recommended) - Fast multilingual transcription, ~2.5 GB download
+    - **Parakeet TDT 0.6B** - Top accuracy with 110x real-time speed
+    - **Whisper Large V3 Turbo** - High accuracy across 99 languages, ~1.6 GB
+    - **Whisper Tiny** - Smallest and fastest, ~150 MB
+    - **Apple Speech** - Built-in, no download (requires macOS 26+)
+    - **Voxtral Mini 3B** - Advanced features including Q&A and summarization
+    
+    <Note>
+    Most models require a one-time download. The download happens automatically and progress is shown in the Petal menu.
+    </Note>
+  </Step>
+  
+  <Step title="Start recording">
+    There are two ways to start recording:
+    
+    **Option 1: Keyboard shortcut (recommended)**
+    
+    Press and hold **Option + Space** (⌥ + Space) to start recording. A floating capsule will appear showing recording status.
+    
+    **Option 2: Menu bar**
+    
+    Click the Petal icon in your menu bar. If recording is available, you'll see recording controls.
+    
+    <Info>
+    The keyboard shortcut works from any app. You can customize it in Settings > Shortcuts.
+    </Info>
+  </Step>
+  
+  <Step title="Speak your audio">
+    While holding the shortcut (or after clicking record), speak clearly into your microphone.
+    
+    The floating capsule shows:
+    - **Visual waveform** indicating audio is being captured
+    - **Duration** of your recording
+    - **Model name** being used for transcription
+    
+    Speak naturally - Petal handles noise and pauses automatically.
+  </Step>
+  
+  <Step title="Stop and transcribe">
+    Release the keyboard shortcut (or click stop) to end recording.
+    
+    Petal will immediately begin transcribing your audio:
+    1. The capsule shows "Transcribing..." with a progress indicator
+    2. When complete, the transcription is automatically copied to your clipboard
+    3. You'll see a confirmation that the text is ready to paste
+    
+    Paste anywhere (Cmd + V) to use your transcription.
+  </Step>
+</Steps>
+
+## Understanding Transcription Modes
+
+Petal supports two transcription modes:
+
+### Verbatim Mode
+
+Word-for-word transcription of exactly what you said.
+
+- Available on all models
+- Fast and accurate
+- No processing or refinement
+- Best for: dictation, notes, meeting transcripts
+
+### Smart Mode
+
+Refines transcription with a custom prompt for improved clarity and formatting.
+
+- Only available on Voxtral models (Mini 3B, Mini 3B 8-bit)
+- Can answer questions, summarize, or reformat your speech
+- Slightly slower than verbatim
+- Best for: cleaned-up notes, summaries, Q&A from voice
+
+<Info>
+Switch between modes in Settings > Transcription. Smart mode requires a Voxtral model to be selected.
+</Info>
+
+## Viewing History
+
+Petal keeps a history of your transcriptions for easy access:
+
+1. Click the Petal menu bar icon
+2. Select **History**
+3. Click any past transcription to copy it to your clipboard
+
+Each history entry shows:
+- Transcription preview
+- Timestamp
+- Model used
+- Duration
+
+<Note>
+You can configure history retention in Settings > Privacy. Options include keeping history for 1 day, 7 days, 30 days, or forever.
+</Note>
+
+## Customizing Your Workflow
+
+### Change the Keyboard Shortcut
+
+The default push-to-talk shortcut is Option + Space, but you can customize it:
+
+1. Open **Settings** from the Petal menu
+2. Go to **Shortcuts**
+3. Click the shortcut field and press your preferred key combination
+4. Close settings to save
+
+### Switch Models
+
+Different models excel at different tasks. To switch models:
+
+1. Open **Settings**
+2. Go to **Models**
+3. Select your preferred model
+4. If needed, Petal will download the model automatically
+
+See [Models Overview](/models/overview) for detailed comparisons.
+
+### Adjust Recording Threshold
+
+If Petal is too sensitive or not sensitive enough to voice:
+
+1. Open **Settings**
+2. Go to **Recording**
+3. Adjust the **Push-to-Talk Threshold**
+   - Lower = more sensitive (picks up quieter speech)
+   - Higher = less sensitive (ignores background noise)
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Keyboard shortcut not working">
+    Make sure you've granted Accessibility permission:
+    
+    1. Open **System Settings > Privacy & Security > Accessibility**
+    2. Enable Petal in the list
+    3. Restart Petal
+    
+    If still not working, try changing the shortcut to avoid conflicts with other apps.
+  </Accordion>
+  
+  <Accordion title="No audio being recorded">
+    Verify microphone permission:
+    
+    1. Open **System Settings > Privacy & Security > Microphone**
+    2. Enable Petal
+    3. Check that your microphone is selected in **System Settings > Sound > Input**
+  </Accordion>
+  
+  <Accordion title="Transcription is inaccurate">
+    Try these solutions:
+    
+    - Speak more clearly and reduce background noise
+    - Switch to a higher-quality model (e.g., Whisper Large V3 Turbo)
+    - Adjust recording threshold in Settings
+    - Ensure your microphone is working properly
+  </Accordion>
+  
+  <Accordion title="Model download failing">
+    Model downloads require an internet connection and storage space:
+    
+    - Check your internet connection
+    - Ensure you have enough free disk space (models range from 150 MB to 9.4 GB)
+    - Try restarting Petal and downloading again
+    - Check the download status in Settings > Models
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+Now that you've completed your first transcription:
+
+<CardGroup cols={2}>
+  <Card title="Explore Models" icon="brain" href="/models/overview">
+    Learn about each model's strengths and when to use them
+  </Card>
+  <Card title="Recording Features" icon="microphone" href="/features/recording">
+    Master push-to-talk, shortcuts, and recording controls
+  </Card>
+  <Card title="Privacy Settings" icon="shield" href="/features/privacy">
+    Configure history retention and data storage
+  </Card>
+  <Card title="Advanced Features" icon="sparkles" href="/features/smart-transcription">
+    Use Smart Mode for refined transcriptions and Q&A
+  </Card>
+</CardGroup>

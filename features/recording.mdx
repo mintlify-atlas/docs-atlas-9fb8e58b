@@ -1,0 +1,149 @@
+---
+title: Recording Audio
+description: Learn how to record audio with Petal's push-to-talk and toggle recording modes
+---
+
+Petal offers flexible recording modes to fit your workflow—from quick voice notes to longer dictation sessions. You can control recording with keyboard shortcuts or the menu bar interface.
+
+## Recording Modes
+
+Petal supports two recording modes:
+
+<CardGroup cols={2}>
+  <Card title="Push-to-Talk" icon="hand">
+    Hold your keyboard shortcut to record, release to stop and transcribe
+  </Card>
+  <Card title="Toggle Recording" icon="toggle-on">
+    Press once to start recording, press again to stop and transcribe
+  </Card>
+</CardGroup>
+
+### Push-to-Talk Mode
+
+Push-to-talk is ideal for quick voice notes and short recordings.
+
+<Steps>
+  <Step title="Hold your recording shortcut">
+    Press and hold your configured keyboard shortcut (default: `Option + Space`)
+  </Step>
+  
+  <Step title="Speak your message">
+    The menu bar icon changes to a recording indicator (`record.circle.fill`) and a floating capsule appears showing the recording level
+  </Step>
+  
+  <Step title="Release to transcribe">
+    Release the keyboard shortcut to stop recording and begin transcription
+  </Step>
+</Steps>
+
+<Note>
+If you hold the key for less than the push-to-talk threshold (default: 2.0 seconds), Petal automatically switches to toggle recording mode and continues recording until you press the shortcut again.
+</Note>
+
+### Toggle Recording Mode
+
+Toggle recording is perfect for longer recordings where holding a key would be inconvenient.
+
+<Steps>
+  <Step title="Tap your recording shortcut">
+    Quickly press and release your keyboard shortcut (hold for less than 2 seconds)
+  </Step>
+  
+  <Step title="Petal enters toggle mode">
+    You'll see the message: "Listening — tap your shortcut to stop."
+    The recording continues hands-free
+  </Step>
+  
+  <Step title="Tap again to transcribe">
+    Press your shortcut again to stop recording and begin transcription
+  </Step>
+</Steps>
+
+<Tip>
+You can customize the push-to-talk threshold in Settings to control how long you need to hold the key before it's considered push-to-talk vs. toggle mode. Options are:
+- **Short**: 0.4 seconds
+- **Medium**: 1.0 seconds  
+- **Long**: 2.0 seconds (default)
+</Tip>
+
+## Menu Bar Controls
+
+The menu bar icon provides visual feedback about Petal's current state:
+
+<Tabs>
+  <Tab title="Idle">
+    **Icon**: `waveform.badge.mic`
+    
+    **Status**: "Ready"
+    
+    Petal is ready to record. Press your keyboard shortcut to begin.
+  </Tab>
+  
+  <Tab title="Recording">
+    **Icon**: `record.circle.fill` (red)
+    
+    **Status**: "REC"
+    
+    Recording is in progress. A floating capsule shows the current audio level.
+  </Tab>
+  
+  <Tab title="Processing">
+    Different icons appear during processing stages:
+    - **Trimming**: `scissors` - Removing silence from your recording
+    - **Speeding**: `figure.run` - Applying automatic speed adjustment (for recordings over 45 seconds)
+    - **Transcribing**: `hourglass` - Converting speech to text
+    - **Refining**: `apple.intelligence` - Applying AI cleanup (Smart mode only)
+  </Tab>
+  
+  <Tab title="Error">
+    **Icon**: `exclamationmark.triangle.fill`
+    
+    **Status**: "Error"
+    
+    Check the menu bar dropdown for error details.
+  </Tab>
+</Tabs>
+
+## Canceling a Recording
+
+If you want to cancel a recording without transcribing it:
+
+<Steps>
+  <Step title="Press Escape while recording">
+    Press the `Esc` key during an active recording session
+  </Step>
+  
+  <Step title="Confirm cancellation">
+    A confirmation prompt appears in the floating capsule
+    - Press `Y` or `Return` to confirm cancellation
+    - Press `N` or `Esc` to continue recording
+  </Step>
+</Steps>
+
+## Deep Link Control
+
+You can control recording programmatically using deep links:
+
+```bash
+# Start recording (toggle mode)
+open "petal://start"
+
+# Stop recording and transcribe
+open "petal://stop"
+
+# Toggle recording state
+open "petal://toggle"
+```
+
+<Info>
+Deep links are useful for automation with tools like Alfred, Raycast, or shell scripts.
+</Info>
+
+## Permissions Required
+
+For recording to work, Petal requires:
+
+- **Microphone Access**: Required to capture audio
+- **Accessibility Access**: Required to automatically paste transcriptions (optional - transcriptions will be copied to clipboard if not granted)
+
+Petal will prompt you for these permissions when you first try to record.

@@ -1,0 +1,221 @@
+---
+title: Keyboard Shortcuts
+description: Configure and customize keyboard shortcuts for recording in Petal
+---
+
+Petal is designed for keyboard-first workflows. The main recording shortcut controls both push-to-talk and toggle recording modes.
+
+## Default Shortcuts
+
+Petal comes with one primary keyboard shortcut:
+
+<Card title="Recording Shortcut" icon="keyboard">
+  **Default**: `Option + Space`
+  
+  **Function**: Start/stop recording (push-to-talk or toggle mode)
+</Card>
+
+<Tip>
+The same shortcut handles both recording modes. How long you hold the key determines which mode activates—see [Recording Modes](/features/recording) for details.
+</Tip>
+
+## Customizing Shortcuts
+
+You can change the recording shortcut to any key combination that works for your workflow.
+
+<Steps>
+  <Step title="Open Settings">
+    Click the Petal menu bar icon, then click the gear icon to open Settings
+  </Step>
+  
+  <Step title="Navigate to Shortcuts">
+    Find the "Keyboard Shortcuts" section in Settings
+  </Step>
+  
+  <Step title="Record new shortcut">
+    Click on the recording shortcut field and press your desired key combination
+  </Step>
+  
+  <Step title="Verify no conflicts">
+    Make sure your chosen shortcut doesn't conflict with system-wide or app-specific shortcuts you use frequently
+  </Step>
+</Steps>
+
+<Warning>
+Avoid using shortcuts that conflict with:
+- macOS system shortcuts (like `Cmd + Space` for Spotlight)
+- Your most-used apps
+- Other global shortcut tools (Alfred, Raycast, etc.)
+</Warning>
+
+## Push-to-Talk Threshold
+
+The push-to-talk threshold controls how long you need to hold the recording shortcut before Petal treats it as push-to-talk vs. toggle mode.
+
+### Available Thresholds
+
+<Tabs>
+  <Tab title="Short">
+    **Duration**: 0.4 seconds
+    
+    **Best for**: Quick taps with minimal accidental toggle activations
+    
+    Hold for less than 0.4s → Toggle mode  
+    Hold for 0.4s or more → Push-to-talk mode
+  </Tab>
+  
+  <Tab title="Medium">
+    **Duration**: 1.0 seconds
+    
+    **Best for**: Balanced workflow with both modes
+    
+    Hold for less than 1.0s → Toggle mode  
+    Hold for 1.0s or more → Push-to-talk mode
+  </Tab>
+  
+  <Tab title="Long (Default)">
+    **Duration**: 2.0 seconds
+    
+    **Best for**: Frequent toggle mode usage, rare push-to-talk
+    
+    Hold for less than 2.0s → Toggle mode  
+    Hold for 2.0s or more → Push-to-talk mode
+  </Tab>
+</Tabs>
+
+### Configuring the Threshold
+
+<Steps>
+  <Step title="Open Settings">
+    Click the Petal menu bar icon and open Settings
+  </Step>
+  
+  <Step title="Find Push-to-Talk Threshold">
+    Locate the "Push-to-Talk Threshold" setting
+  </Step>
+  
+  <Step title="Select your preference">
+    Choose Short (0.4s), Medium (1.0s), or Long (2.0s) based on your recording style
+  </Step>
+</Steps>
+
+<Info>
+The threshold is stored in your settings as `pushToTalkThreshold` and persists across app launches.
+</Info>
+
+## Shortcut Behavior Details
+
+### Key Down Event
+
+When you press your recording shortcut:
+
+1. **Setup check**: Petal verifies you've completed initial setup
+2. **Permission check**: Confirms microphone access is granted
+3. **State check**: Ensures no recording is already in progress
+4. **Recording starts**: Audio capture begins with level monitoring
+5. **Visual feedback**: Menu bar icon changes and floating capsule appears
+
+### Key Up Event
+
+When you release your recording shortcut:
+
+1. **Duration check**: Measures how long the key was held
+2. **Mode decision**:
+   - If held < threshold → Activates toggle mode (keeps recording)
+   - If held ≥ threshold → Stops and transcribes (push-to-talk)
+3. **Processing begins**: Transcription pipeline starts if stopping
+
+### Toggle Mode Override
+
+If toggle mode is already active and you press the shortcut:
+
+- **Immediate stop**: Recording stops regardless of hold duration
+- **No threshold check**: The key press always stops toggle mode
+- **Transcription begins**: Processing starts immediately
+
+<Note>
+This design lets you quickly stop a toggle recording without waiting for the threshold timer.
+</Note>
+
+## Shortcut Implementation
+
+Petal uses the `KeyboardShortcuts` library to handle global shortcuts:
+
+```swift
+// From ShortcutName.swift (line 4)
+public extension KeyboardShortcuts.Name {
+    static let pushToTalk = Self("pushToTalk", default: .init(.space, modifiers: .option))
+}
+```
+
+The shortcut:
+- Works globally across all apps
+- Monitors both key down and key up events
+- Stores custom shortcuts in macOS user defaults
+- Persists across app restarts
+
+## Accessibility Considerations
+
+### Key Holding Difficulty
+
+If you have difficulty holding keys for extended periods:
+
+1. **Use a shorter threshold**: Set to Short (0.4s) or Medium (1.0s)
+2. **Prefer toggle mode**: Quick tap to start, quick tap to stop
+3. **Use deep links**: Automate with external tools that don't require holding
+
+### Alternative Input Methods
+
+You can trigger recording without keyboard shortcuts:
+
+- **Deep links**: `open "petal://start"` and `open "petal://stop"`
+- **Menu bar**: Click the menu bar icon and select recording options
+- **Automation tools**: Use Alfred, Raycast, or shell scripts to trigger deep links
+
+<Tip>
+For voice-controlled recording, you can use macOS Voice Control to trigger deep links:
+"Open URL petal://toggle"
+</Tip>
+
+## Troubleshooting
+
+### Shortcut Not Working
+
+<AccordionGroup>
+  <Accordion title="Check Accessibility Permission">
+    Petal requires Accessibility permission to monitor global keyboard shortcuts.
+    
+    1. Open System Settings → Privacy & Security → Accessibility
+    2. Verify Petal is in the list and enabled
+    3. If not, click the + button and add Petal
+  </Accordion>
+  
+  <Accordion title="Shortcut Conflicts">
+    Another app or system feature might be using your shortcut.
+    
+    1. Try a different key combination
+    2. Check System Settings → Keyboard → Keyboard Shortcuts
+    3. Disable conflicting shortcuts in other apps
+  </Accordion>
+  
+  <Accordion title="Restart Petal">
+    If shortcuts stop working after system wake or restart:
+    
+    1. Quit Petal completely
+    2. Relaunch Petal from Applications
+    3. Test the shortcut again
+  </Accordion>
+</AccordionGroup>
+
+### Key Events Not Detected
+
+If Petal doesn't respond to key presses:
+
+1. **Check foreground app**: Some apps capture keyboard events
+2. **Verify Petal is running**: Look for the menu bar icon
+3. **Review permissions**: Ensure Accessibility access is granted
+4. **Test with different keys**: Try modifiers like `Ctrl`, `Cmd`, or `Shift`
+
+<Info>
+Petal registers shortcut handlers during app initialization (AppModel.swift:1028-1039) and monitors keyboard events globally when recording is active.
+</Info>

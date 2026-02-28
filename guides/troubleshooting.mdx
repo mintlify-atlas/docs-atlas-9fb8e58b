@@ -1,0 +1,538 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for Petal
+icon: wrench
+---
+
+This guide covers common issues you might encounter while using Petal and how to resolve them.
+
+## Permission Issues
+
+<Accordion title="Microphone permission denied">
+  **Symptoms:**
+  - Error message: "Microphone permission denied"
+  - Recording fails to start
+  - Menu bar shows error icon
+  
+  **Solution:**
+  
+  <Steps>
+    <Step title="Open System Settings">
+      Click the Apple menu > System Settings
+    </Step>
+    
+    <Step title="Navigate to Privacy & Security">
+      Select "Privacy & Security" from the sidebar
+    </Step>
+    
+    <Step title="Enable Microphone Access">
+      1. Click "Microphone" in the list
+      2. Find "Petal" in the app list
+      3. Toggle the switch to enable access
+    </Step>
+    
+    <Step title="Return to Petal">
+      Permission changes take effect immediately. Try recording again.
+    </Step>
+  </Steps>
+  
+  <Note>
+  Petal monitors permission status and will detect when you grant access. You don't need to restart the app.
+  </Note>
+</Accordion>
+
+<Accordion title="Auto-paste not working / Accessibility permission needed">
+  **Symptoms:**
+  - Transcription completes but doesn't paste
+  - Message: "Accessibility access is needed to paste"
+  - Text is copied to clipboard instead of pasting
+  
+  **Why this happens:**
+  
+  Petal needs Accessibility permission to simulate keyboard input and paste transcriptions into your active application.
+  
+  **Solution:**
+  
+  <Steps>
+    <Step title="Open System Settings">
+      Click the Apple menu > System Settings
+    </Step>
+    
+    <Step title="Navigate to Privacy & Security">
+      Select "Privacy & Security" from the sidebar
+    </Step>
+    
+    <Step title="Enable Accessibility Access">
+      1. Click "Accessibility" in the list
+      2. Click the lock icon and authenticate if needed
+      3. Find "Petal" in the app list
+      4. Toggle the switch to enable access
+    </Step>
+    
+    <Step title="Test Auto-paste">
+      Make a new recording to verify auto-paste works
+    </Step>
+  </Steps>
+  
+  <Tip>
+  Even without Accessibility permission, Petal copies transcriptions to your clipboard. You can paste manually with Cmd+V.
+  </Tip>
+</Accordion>
+
+<Accordion title="Permission prompt not appearing">
+  **Symptoms:**
+  - Petal doesn't ask for microphone/accessibility permission
+  - Recording fails silently
+  
+  **Solution:**
+  
+  Manually trigger permission grants from Settings:
+  
+  1. Open Petal settings (click menu bar icon)
+  2. Go to General tab
+  3. Click "Grant Access" button for the required permission
+  4. Follow the system prompts
+  
+  If this doesn't work, manually enable permissions in System Settings as described above.
+</Accordion>
+
+## Model Issues
+
+<Accordion title="Model download fails">
+  **Symptoms:**
+  - Download progress stalls or shows error
+  - Error message appears below "Download Model" button
+  - Download never completes
+  
+  **Common causes and solutions:**
+  
+  ### Network Issues
+  - Check your internet connection
+  - Disable VPN temporarily (some block model repositories)
+  - Try downloading on a different network
+  
+  ### Disk Space
+  - Verify you have enough free space (check model size in settings)
+  - Models are stored in `~/Documents/petal/models/`
+  - Delete old models to free space if needed
+  
+  ### Interrupted Downloads
+  1. Click "Cancel" to stop the current download
+  2. Wait a few seconds
+  3. Click "Download Model" again to restart
+  
+  <Tip>
+  If a download consistently fails, try a different model. Smaller models like "Whisper Tiny" (~150 MB) are faster to download and can help diagnose network issues.
+  </Tip>
+</Accordion>
+
+<Accordion title="Model download stuck at 99%">
+  **Symptoms:**
+  - Download progress reaches 99% but never completes
+  - App appears frozen during final processing
+  
+  **Why this happens:**
+  
+  The final 1% represents model validation and preparation, which can take time for large models.
+  
+  **Solution:**
+  
+  - Wait patiently (can take 30-60 seconds for large models)
+  - Do not cancel during this phase
+  - If stuck for >2 minutes, cancel and retry download
+</Accordion>
+
+<Accordion title="'Model not downloaded' error when trying to record">
+  **Symptoms:**
+  - Pressing keyboard shortcut shows error
+  - Can't start recording
+  - Settings shows model as not downloaded
+  
+  **Solution:**
+  
+  <Steps>
+    <Step title="Check Download Status">
+      Open Settings > Transcription and verify model status
+    </Step>
+    
+    <Step title="Download the Model">
+      If not downloaded, click "Download Model" and wait for completion
+    </Step>
+    
+    <Step title="Verify Disk Space">
+      Ensure sufficient space for the model size shown in settings
+    </Step>
+    
+    <Step title="Try Recording">
+      After download completes, the model will warm up automatically. Look for the green checkmark.
+    </Step>
+  </Steps>
+  
+  <Note>
+  Petal automatically warms up models after download to ensure they're ready for use. You'll see a "Warming up..." indicator during this process.
+  </Note>
+</Accordion>
+
+<Accordion title="Model warming up takes forever">
+  **Symptoms:**
+  - "Warming up model..." message persists
+  - First transcription after app launch is very slow
+  
+  **Why this happens:**
+  
+  Model warmup loads the model into memory and performs a test transcription. This is normal and happens:
+  - After downloading a new model
+  - When switching models
+  - On first launch after app updates
+  
+  **Normal warmup times:**
+  - Apple Speech: 1-2 seconds
+  - Whisper Tiny: 3-5 seconds
+  - Qwen3/Parakeet: 10-15 seconds
+  - Voxtral models: 30-60 seconds
+  
+  **If warmup exceeds these times:**
+  1. Check Activity Monitor for high CPU usage
+  2. Close other memory-intensive apps
+  3. Restart Petal
+  4. Try a different model to isolate the issue
+</Accordion>
+
+## Recording Issues
+
+<Accordion title="Recording won't start">
+  **Symptoms:**
+  - Pressing keyboard shortcut does nothing
+  - No floating capsule appears
+  - Menu bar icon doesn't change
+  
+  **Check these in order:**
+  
+  1. **Keyboard shortcut set?**
+     - Settings > General > Push to Talk
+     - Verify a shortcut is assigned
+     - Try changing to a different shortcut
+  
+  2. **Microphone permission granted?**
+     - Settings > General > Permissions
+     - Should show green checkmark
+     - If not, click "Grant Access"
+  
+  3. **Model downloaded?**
+     - Settings > Transcription > Status
+     - Should show "Downloaded" or "Ready"
+     - If not, download the model
+  
+  4. **Setup completed?**
+     - Menu bar should say "Ready" when idle
+     - If it says "Setup Required", complete onboarding
+  
+  5. **Another recording in progress?**
+     - Petal only allows one recording at a time
+     - Check if floating capsule is already visible
+</Accordion>
+
+<Accordion title="Recording level too quiet / too loud">
+  **Symptoms:**
+  - Floating capsule shows no audio level
+  - Audio level maxed out constantly
+  - Transcription is empty or inaccurate
+  
+  **Solution:**
+  
+  Adjust your system microphone input level:
+  
+  1. Open System Settings > Sound
+  2. Select "Input" tab
+  3. Choose your microphone from the list
+  4. Adjust "Input volume" slider while speaking
+  5. Aim for levels that reach 50-80% when speaking normally
+  
+  <Warning>
+  If input level is at minimum and you hear nothing, your microphone may be muted or not selected as the input device.
+  </Warning>
+</Accordion>
+
+<Accordion title="Recording cancels unexpectedly">
+  **Symptoms:**
+  - Recording stops without completing transcription
+  - Message: "Recording cancelled"
+  
+  **Common causes:**
+  
+  - You pressed Escape and confirmed cancellation
+  - System audio input changed (e.g., headphones disconnected)
+  - Microphone access was revoked during recording
+  
+  **Prevention:**
+  - Don't disconnect audio devices during recording
+  - Avoid pressing Escape unless you want to cancel
+  - Keep microphone permissions granted
+</Accordion>
+
+## Transcription Issues
+
+<Accordion title="Transcription is empty / no speech detected">
+  **Symptoms:**
+  - Recording completes but transcription is empty
+  - Message: "No speech detected"
+  - Nothing pasted or copied
+  
+  **Common causes:**
+  
+  ### 1. Microphone Input Level Too Low
+  - Check System Settings > Sound > Input
+  - Increase input volume
+  - Test with another app (Voice Memos) to verify microphone works
+  
+  ### 2. Wrong Input Device Selected
+  - Ensure correct microphone is selected in System Settings
+  - Some Macs have multiple input devices
+  - Try switching between input devices
+  
+  ### 3. Recording Too Short
+  - Recordings under 0.5 seconds may not be processed
+  - Speak for at least 1 second
+  
+  ### 4. Trim Silence Too Aggressive
+  - If enabled, Settings > Transcription > Trim silence
+  - Try disabling this setting
+  - Make a new recording
+  
+  <Tip>
+  To test your microphone, use macOS Voice Memos app. If it records audio successfully, Petal should work too.
+  </Tip>
+</Accordion>
+
+<Accordion title="Transcription takes too long">
+  **Symptoms:**
+  - Transcription hangs at "Transcribing..." for minutes
+  - Menu bar shows hourglass icon indefinitely
+  
+  **Expected transcription times:**
+  
+  For 1 minute of audio:
+  - Apple Speech: ~5-10 seconds
+  - Whisper Tiny: ~15-20 seconds  
+  - Qwen3/Parakeet: ~20-30 seconds
+  - Whisper Large V3 Turbo: ~60-90 seconds
+  - Voxtral models: ~90-120 seconds
+  
+  **If transcription exceeds these times:**
+  
+  1. **Check system resources**
+     - Open Activity Monitor
+     - Look for high CPU usage by other apps
+     - Close unnecessary applications
+  
+  2. **Try a faster model**
+     - Switch to Apple Speech or Whisper Tiny
+     - These are optimized for speed
+  
+  3. **Enable preprocessing**
+     - Settings > Transcription > Trim silence
+     - Settings > Transcription > Auto speed-up
+     - Both can reduce processing time
+  
+  4. **Restart Petal**
+     - Quit completely (Cmd+Q from menu bar)
+     - Relaunch and try again
+</Accordion>
+
+<Accordion title="Transcription is inaccurate">
+  **Symptoms:**
+  - Many words are wrong
+  - Nonsensical output
+  - Missing words or sentences
+  
+  **Improve accuracy:**
+  
+  ### 1. Choose a Better Model
+  - Qwen3 ASR: Best for multilingual
+  - Parakeet TDT: Top accuracy benchmark
+  - Whisper Large V3 Turbo: Best for English
+  - Voxtral: Best for natural language understanding
+  
+  ### 2. Improve Recording Quality
+  - Speak clearly and at moderate pace
+  - Reduce background noise
+  - Use a better microphone if available
+  - Record in a quieter environment
+  
+  ### 3. Adjust Settings
+  - Disable "Trim silence" if it cuts off speech
+  - Try both Verbatim and Smart modes
+  - For Smart mode, refine your custom prompt
+  
+  ### 4. Language Support
+  - Whisper models support 99 languages
+  - Qwen3 supports 30+ languages including Chinese dialects
+  - Other models are primarily English-focused
+  
+  <Note>
+  Accuracy varies by model and use case. Experiment with different models to find the best fit for your needs.
+  </Note>
+</Accordion>
+
+<Accordion title="Apple Intelligence refinement not working">
+  **Symptoms:**
+  - Smart mode doesn't improve transcription
+  - No "Refining..." stage appears
+  - Output is same as verbatim
+  
+  **Requirements:**
+  - macOS 26 or later
+  - Apple Intelligence enabled in System Settings
+  - Settings > Transcription > Enhance with Apple Intelligence (enabled)
+  - Transcription mode set to "Smart"
+  
+  **Check:**
+  
+  1. Verify macOS version (About This Mac)
+  2. System Settings > Apple Intelligence > Enable
+  3. Petal Settings > Transcription > Apple Intelligence section
+  4. Look for green checkmark, not "Unavailable"
+  
+  <Warning>
+  Apple Intelligence is only available on Macs with Apple Silicon (M1 or later) running macOS 26+.
+  </Warning>
+</Accordion>
+
+## App Behavior Issues
+
+<Accordion title="Petal doesn't appear in menu bar">
+  **Symptoms:**
+  - Can't find Petal icon in menu bar
+  - App seems to not be running
+  
+  **Solution:**
+  
+  1. Check if Petal is running:
+     - Open Spotlight (Cmd+Space)
+     - Search for "Petal"
+     - Launch if not running
+  
+  2. Menu bar might be crowded:
+     - Look for a >> icon in menu bar (indicates overflow)
+     - Click it to see hidden menu bar items
+     - Consider hiding other menu bar apps
+  
+  3. Reset menu bar:
+     - Quit Petal (if running)
+     - Relaunch the app
+     - Icon should appear within seconds
+</Accordion>
+
+<Accordion title="Keyboard shortcut doesn't work">
+  **Symptoms:**
+  - Pressing shortcut does nothing
+  - No response from Petal
+  
+  **Troubleshoot:**
+  
+  1. **Shortcut conflict**
+     - Another app may use the same shortcut
+     - Try changing Petal's shortcut in Settings > General
+     - Choose a unique combination
+  
+  2. **Accessibility permission required**
+     - Some shortcuts require Accessibility access to function
+     - Grant permission in System Settings
+  
+  3. **Keyboard not focused**
+     - Click any app to ensure keyboard input is active
+     - Shortcuts don't work during screensaver/lock screen
+  
+  <Tip>
+  Good shortcut choices avoid conflicts: Opt+Shift+Space, Ctrl+Shift+R, or Cmd+Shift+M are often available.
+  </Tip>
+</Accordion>
+
+<Accordion title="Clipboard restore not working">
+  **Symptoms:**
+  - After transcription, previous clipboard content is lost
+  - Expected clipboard restoration doesn't happen
+  
+  **Check:**
+  
+  1. Settings > General > Restore clipboard after paste (enabled?)
+  2. Accessibility permission granted (required for clipboard access)
+  
+  **Known limitations:**
+  
+  - Only restores text clipboard content
+  - Rich content (images, files) may not restore
+  - Some clipboard managers may interfere
+  
+  If problematic, disable this setting and use a clipboard manager app instead.
+</Accordion>
+
+## Performance Issues
+
+<Accordion title="Petal uses too much memory">
+  **Symptoms:**
+  - High memory usage in Activity Monitor
+  - Mac becomes slow when Petal is running
+  
+  **Why this happens:**
+  
+  Large transcription models are loaded into memory:
+  - Whisper Tiny: ~200 MB
+  - Qwen3/Parakeet: ~3-4 GB
+  - Voxtral models: ~5-10 GB
+  
+  **Solutions:**
+  
+  1. Use a smaller model (Apple Speech, Whisper Tiny)
+  2. Quit Petal when not actively using it
+  3. Upgrade Mac RAM if frequently transcribing
+  
+  <Note>
+  Memory is released when you quit Petal (Cmd+Q). The app doesn't run background processes when not in use.
+  </Note>
+</Accordion>
+
+<Accordion title="First transcription after launch is slow">
+  **Symptoms:**
+  - First recording takes much longer to transcribe
+  - Subsequent recordings are faster
+  
+  **Why this happens:**
+  
+  This is normal behavior. The model is loaded and warmed up on first use. Subsequent transcriptions reuse the loaded model and are much faster.
+  
+  **To avoid:**
+  - Keep Petal running when actively transcribing
+  - Models stay loaded in memory between uses
+</Accordion>
+
+## Getting Help
+
+If you've tried the solutions above and still experience issues:
+
+<Steps>
+  <Step title="Enable Logging">
+    Settings > General > Diagnostics > Enable logs
+  </Step>
+  
+  <Step title="Reproduce the Issue">
+    Perform the action that causes the problem
+  </Step>
+  
+  <Step title="Export Logs">
+    Settings > General > Diagnostics > Export Logs
+  </Step>
+  
+  <Step title="Report the Issue">
+    Contact Petal support with:
+    - Description of the problem
+    - Steps to reproduce
+    - macOS version
+    - Model being used
+    - Exported log files
+  </Step>
+</Steps>
+
+<Tip>
+Before reporting an issue, try restarting Petal. Many transient problems resolve with a fresh launch.
+</Tip>

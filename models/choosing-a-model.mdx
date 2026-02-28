@@ -1,0 +1,253 @@
+---
+title: 'Choosing a Model'
+description: 'Guide to selecting the right transcription model for your needs'
+icon: 'compass'
+---
+
+Choosing the right transcription model depends on your priorities: speed, accuracy, language support, storage space, and whether you need smart features like summarization.
+
+## Quick Recommendations
+
+<CardGroup cols={2}>
+  <Card title="Best Overall" icon="star" iconType="solid" color="#4F46E5">
+    **Qwen3 ASR 0.6B**
+    
+    Excellent balance of speed (4/5) and quality (4/5). Supports 30+ languages. Default recommended model.
+  </Card>
+  
+  <Card title="Fastest" icon="bolt" iconType="solid" color="#000000">
+    **Apple Speech** or **Parakeet TDT**
+    
+    Both offer 5/5 speed. Apple Speech requires no download. Parakeet offers better accuracy.
+  </Card>
+  
+  <Card title="Highest Accuracy" icon="bullseye" iconType="solid" color="#10A37F">
+    **Whisper Large V3 Turbo**
+    
+    Best quality (5/5) across 99 languages. Slower speed (2/5) but worth it for maximum accuracy.
+  </Card>
+  
+  <Card title="Smart Features" icon="sparkles" iconType="solid" color="#FF7000">
+    **Voxtral Mini 3B (8-bit)**
+    
+    Q&A and summarization from voice. Good balance of features and memory usage (~4.6 GB).
+  </Card>
+</CardGroup>
+
+## Decision Tree
+
+Use this guide to find your ideal model:
+
+### Do you need smart features (Q&A, summarization)?
+
+**Yes** → Choose a Voxtral model:
+- **Voxtral Mini 3B (bf16)**: Maximum quality, larger size (~9.4 GB)
+- **Voxtral Mini 3B (8-bit)**: Lower memory, still excellent quality (~4.6 GB)
+
+**No** → Continue below
+
+### What's your priority: speed or accuracy?
+
+<Accordion title="Speed is most important">
+  Choose from these fastest models (speed score 4-5/5):
+  
+  1. **Apple Speech** (5/5 speed)
+     - No download required
+     - Only available on macOS 26+ supported Macs
+     - Good accuracy (3/5)
+     - Best for: Quick transcriptions without downloads
+  
+  2. **Parakeet TDT 0.6B** (5/5 speed)
+     - Requires download
+     - High accuracy (4/5)
+     - 110x real-time speed
+     - Best for: Maximum speed with excellent accuracy
+  
+  3. **Qwen3 ASR 0.6B** (4/5 speed)
+     - Requires download (~2.5 GB)
+     - High accuracy (4/5)
+     - 30+ languages including Chinese
+     - Best for: All-around fast multilingual use
+  
+  4. **Whisper Tiny** (4/5 speed)
+     - Smallest download (~150 MB)
+     - Basic accuracy (2/5)
+     - Multi-language support
+     - Best for: Minimal storage with decent speed
+</Accordion>
+
+<Accordion title="Accuracy is most important">
+  Choose from these highest quality models (smart score 4-5/5):
+  
+  1. **Whisper Large V3 Turbo** (5/5 quality)
+     - 99 languages supported
+     - Medium size (~1.6 GB)
+     - Slower speed (2/5)
+     - Best for: Maximum accuracy across many languages
+  
+  2. **Qwen3 ASR 0.6B** (4/5 quality)
+     - 30+ languages
+     - Fast speed (4/5)
+     - Medium size (~2.5 GB)
+     - Best for: Balanced accuracy and speed
+  
+  3. **Parakeet TDT 0.6B** (4/5 quality)
+     - Top-ranked on Open ASR Leaderboard
+     - Fastest speed (5/5)
+     - Size not specified
+     - Best for: High accuracy with maximum speed
+</Accordion>
+
+### How much storage space do you have?
+
+<Info>
+All downloaded models are stored locally. You can delete models anytime to free up space.
+</Info>
+
+**Minimal space (< 500 MB)**:
+- **Whisper Tiny**: ~150 MB only
+- **Apple Speech**: No download required
+
+**Moderate space (500 MB - 3 GB)**:
+- **Whisper Large V3 Turbo**: ~1.6 GB
+- **Qwen3 ASR 0.6B**: ~2.5 GB
+
+**Generous space (3 GB+)**:
+- **Voxtral Mini 3B (8-bit)**: ~4.6 GB
+- **Voxtral Mini 3B (bf16)**: ~9.4 GB
+
+## Model Comparison Chart
+
+Here's how all models compare across key metrics:
+
+| Model | Speed Score | Smart Score | Size | Download Required | Smart Mode |
+|-------|-------------|-------------|------|-------------------|------------|
+| Qwen3 ASR 0.6B | 4/5 ⚡⚡⚡⚡ | 4/5 🧠🧠🧠🧠 | ~2.5 GB | ✅ Yes | ❌ No |
+| Apple Speech | 5/5 ⚡⚡⚡⚡⚡ | 3/5 🧠🧠🧠 | Built-in | ❌ No | ❌ No |
+| Parakeet TDT | 5/5 ⚡⚡⚡⚡⚡ | 4/5 🧠🧠🧠🧠 | N/A | ✅ Yes | ❌ No |
+| Whisper Large V3 | 2/5 ⚡⚡ | 5/5 🧠🧠🧠🧠🧠 | ~1.6 GB | ✅ Yes | ❌ No |
+| Whisper Tiny | 4/5 ⚡⚡⚡⚡ | 2/5 🧠🧠 | ~150 MB | ✅ Yes | ❌ No |
+| Voxtral 3B (bf16) | 2/5 ⚡⚡ | 5/5 🧠🧠🧠🧠🧠 | ~9.4 GB | ✅ Yes | ✅ Yes |
+| Voxtral 3B (8-bit) | 3/5 ⚡⚡⚡ | 4/5 🧠🧠🧠🧠 | ~4.6 GB | ✅ Yes | ✅ Yes |
+
+## Understanding Score Ratings
+
+### Speed Score (1-5)
+
+Measures how fast the model transcribes audio relative to real-time:
+
+- **5/5**: Lightning fast (110x+ real-time) - Parakeet, Apple Speech
+- **4/5**: Very fast - Qwen3, Whisper Tiny
+- **3/5**: Moderate speed - Voxtral 8-bit
+- **2/5**: Slower but accurate - Whisper Large V3, Voxtral bf16
+- **1/5**: Slowest (none currently)
+
+<Note>
+Even "slower" models still transcribe faster than real-time on Apple Silicon Macs.
+</Note>
+
+### Smart Score (1-5)
+
+Measures transcription quality, accuracy, and intelligence:
+
+- **5/5**: Highest accuracy and quality - Whisper Large V3, Voxtral bf16
+- **4/5**: Excellent accuracy - Qwen3, Parakeet, Voxtral 8-bit
+- **3/5**: Good accuracy - Apple Speech
+- **2/5**: Basic accuracy - Whisper Tiny
+- **1/5**: Minimal accuracy (none currently)
+
+## Language Support
+
+Different models have varying language support:
+
+<Accordion title="Multilingual Models (30+ languages)">
+  **Qwen3 ASR 0.6B**:
+  - 30+ languages including Chinese dialects
+  - Optimized for multilingual use
+  - Excellent for international users
+  
+  **Whisper Large V3 Turbo**:
+  - 99 languages supported
+  - Best language coverage
+  - Industry-leading multilingual accuracy
+</Accordion>
+
+<Accordion title="Multi-language Models">
+  Most other models support common languages including:
+  - English
+  - Spanish
+  - French
+  - German
+  - And more
+  
+  Models in this category:
+  - Apple Speech
+  - Parakeet TDT 0.6B
+  - Whisper Tiny
+  - Voxtral models
+</Accordion>
+
+## Use Case Examples
+
+<CardGroup cols={2}>
+  <Card title="Podcast Transcription" icon="podcast">
+    **Recommended**: Qwen3 ASR or Whisper Large V3
+    
+    Long-form content needs accuracy and handles various audio quality. Qwen3 for speed, Whisper for maximum accuracy.
+  </Card>
+  
+  <Card title="Meeting Notes" icon="users">
+    **Recommended**: Parakeet TDT or Qwen3 ASR
+    
+    Fast transcription with good accuracy. Parakeet offers top speed, Qwen3 balances speed and quality.
+  </Card>
+  
+  <Card title="Quick Voice Memos" icon="microphone">
+    **Recommended**: Apple Speech or Parakeet TDT
+    
+    Maximum speed for quick notes. Apple Speech if no download wanted, Parakeet for better accuracy.
+  </Card>
+  
+  <Card title="Content Summarization" icon="sparkles">
+    **Recommended**: Voxtral Mini 3B (8-bit)
+    
+    Only Voxtral models support smart mode with Q&A and summarization. Choose 8-bit for good balance.
+  </Card>
+  
+  <Card title="International Content" icon="globe">
+    **Recommended**: Whisper Large V3 or Qwen3 ASR
+    
+    Whisper supports 99 languages, Qwen3 handles 30+ including Chinese dialects.
+  </Card>
+  
+  <Card title="Low Storage Devices" icon="hard-drive">
+    **Recommended**: Apple Speech or Whisper Tiny
+    
+    Apple Speech uses no storage. Whisper Tiny only requires ~150 MB.
+  </Card>
+</CardGroup>
+
+## Switching Models
+
+You can easily switch between models in Petal:
+
+1. Models are selected in the app settings
+2. Downloaded models remain available for quick switching
+3. You can have multiple models downloaded simultaneously
+4. Delete unused models to free up space
+
+<Warning>
+Switching to an undownloaded model will require downloading it first. This can take several minutes depending on model size and internet speed.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Model Overview" icon="grid-2" href="/models/overview">
+    See complete specifications for all models
+  </Card>
+  
+  <Card title="Download Models" icon="download" href="/models/downloading-models">
+    Learn how to download and manage models
+  </Card>
+</CardGroup>
